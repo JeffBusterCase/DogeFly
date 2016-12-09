@@ -10,12 +10,14 @@ import com.cutepuppy.game.utils.*;
  * Created by jeffbustercase on 06/12/16.
  */
 public class Doge extends Image {
+    private int health;
     private boolean superPower;
     private Rectangle bounds;
     public static final int id = 0;
     public Doge(Texture texture) {
         super(texture);
         superPower = false;
+        health = Constants.PlayerHealth;
         setSize(getWidth()/4, getHeight()/4);
         bounds = new Rectangle(getX(), getY(), getWidth(), getHeight());
         setBounds(getX(), getY(), getWidth(), getHeight());
@@ -49,4 +51,8 @@ public class Doge extends Image {
         return bounds;
     }
     public int getId(){return id;}
+
+    public void tookDamageFrom(Enemy enemy) {
+
+    }
 }

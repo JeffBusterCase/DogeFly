@@ -75,8 +75,10 @@ public class CutePuppy3 extends ApplicationAdapter {
             public boolean act(float delta) {
                 // Get Collision between enemy and player
                 for(Enemy enemy : Dynamic.enemies){
-                    if(doge.getBounds().contains(enemy.getBounds()))
+                    if(doge.getBounds().contains(enemy.getBounds())){
+                        doge.tookDamageFrom();
                         enemy.die();
+                    }
                 }
 
 

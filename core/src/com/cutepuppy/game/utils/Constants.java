@@ -8,6 +8,7 @@ import java.util.Random;
  * Created by jeffbustercase on 09/12/16.
  */
 public final class Constants {
+    public static final float PlayerHealth = 100f;
     public static final float EnemySpeed = 5f;
     public static final float PlayerSpeedPower = 4f;
     public static final long EnemyGenerationTime = 1000;
