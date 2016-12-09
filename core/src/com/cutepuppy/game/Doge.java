@@ -2,6 +2,7 @@ package com.cutepuppy.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.cutepuppy.game.utils.*;
 
@@ -10,12 +11,14 @@ import com.cutepuppy.game.utils.*;
  */
 public class Doge extends Image {
     private boolean superPower;
-
+    private Rectangle bounds;
+    public static final int id = 0;
     public Doge(Texture texture) {
         super(texture);
         superPower = false;
-        setBounds(getX(), getY(), getWidth(), getHeight());
         setSize(getWidth()/4, getHeight()/4);
+        bounds = new Rectangle(getX(), getY(), getWidth(), getHeight());
+        setBounds(getX(), getY(), getWidth(), getHeight());
         setOrigin(getWidth()/4, getHeight()/4);
         setPosition(100f, Gdx.graphics.getHeight()/2);
         setScale(-getScaleX(), getScaleY());
@@ -39,8 +42,11 @@ public class Doge extends Image {
             }
         }
     }
-    private void activateSuperPower(){
-        /* Do thing to activate super power (i.e. show super power img and make constant damage to enemies in line) */
+    private void activateSuperPower() {
+        /* TODO: Do thing to activate super power (i.e. show super power img and make constant damage to enemies in line) */
     }
-    public 
+    public Rectangle getBounds(){
+        return bounds;
+    }
+    public int getId(){return id;}
 }

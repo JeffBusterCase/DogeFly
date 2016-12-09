@@ -74,12 +74,15 @@ public class CutePuppy3 extends ApplicationAdapter {
             @Override
             public boolean act(float delta) {
                 // Get Collision between enemy and player
-                if(stage.co)
+                for(Enemy enemy : Dynamic.enemies){
+                    if(doge.getBounds().contains(enemy.getBounds()))
+                        enemy.die();
+                }
 
 
                 return false;
             }
-        })
+        });
 
         stage.addActor(background);
 		stage.addActor(doge);

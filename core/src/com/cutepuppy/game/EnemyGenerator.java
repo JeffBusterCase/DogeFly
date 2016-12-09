@@ -22,7 +22,9 @@ class EnemyGenerator implements Runnable {
     }
     private void main() throws InterruptedException {
          do {
-             stage.addActor(new Enemy(Constants.birdTexture, Dynamic.enemyid++));
+             Enemy enemy = new Enemy(Constants.birdTexture, Dynamic.enemyid++);
+             stage.addActor(enemy);
+             Dynamic.enemies.add(enemy);
              Thread.sleep(Constants.EnemyGenerationTime);
          } while(Dynamic.CAN_GENERATE_ENEMIES);
     }
