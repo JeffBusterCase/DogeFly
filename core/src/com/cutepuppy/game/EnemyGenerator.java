@@ -6,9 +6,9 @@ import com.cutepuppy.game.utils.*;
 /**
  * Created by jeffbustercase on 09/12/16.
  */
-class EnemyGenerator implements Runnable {
+public class EnemyGenerator implements Runnable {
     Stage stage;
-    EnemyGenerator(Stage stage){
+    public EnemyGenerator(Stage stage){
         super();
         this.stage = stage;
     }
@@ -23,6 +23,7 @@ class EnemyGenerator implements Runnable {
     private void main() throws InterruptedException {
          do {
              Enemy enemy = new Enemy(Constants.birdTexture, Dynamic.enemyid++);
+             enemy.setDamage(5);
              stage.addActor(enemy);
              Dynamic.enemies.add(enemy);
              Thread.sleep(Constants.EnemyGenerationTime);

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.cutepuppy.game.utils.Constants;
 import com.cutepuppy.game.utils.Dynamic;
@@ -13,10 +14,14 @@ import com.cutepuppy.game.utils.Dynamic;
  */
 public class Enemy extends Image {
     private int id;
+    private int damage;
     private Rectangle bounds;
+
+
     public Enemy(Texture texture, int id){
         super(texture);
         this.id = id;
+        damage=0;
         // Adjust Position
         setSize(getWidth()/4, getHeight()/4);
         bounds = new Rectangle(getX(), getY(), getWidth(), getHeight());
@@ -30,20 +35,30 @@ public class Enemy extends Image {
         super.act(delta);
 
         // If pass through limit, die.
-        if(getX()<=0) die();
+        if(getX()<=-getWidth()) die();
 
         // Constant Movement
         setPosition(getX()-Constants.EnemySpeed, getY());
+        bounds.setPosition(getX()-getWidth()/2, getY()-getY()-getHeight()/2);
     }
 
     public int getId() {
         return id;
     }
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
     public Rectangle getBounds(){
         return bounds;
     }
     public void die(){
-        Dynamic.enemies.removeValue(this, true);
         remove();
+        clear();
+        Dynamic.enemies.removeValue(this, true);
     }
 }

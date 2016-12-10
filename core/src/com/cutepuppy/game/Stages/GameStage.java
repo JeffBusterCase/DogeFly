@@ -1,35 +1,39 @@
-package com.cutepuppy.game;
+package com.cutepuppy.game.Stages;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.*;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-
+import com.cutepuppy.game.Doge;
+import com.cutepuppy.game.Enemy;
+import com.cutepuppy.game.EnemyGenerator;
+import com.cutepuppy.game.backgrounds.Background;
 import com.cutepuppy.game.utils.Constants;
 import com.cutepuppy.game.utils.Dynamic;
 
-public class CutePuppy3 extends ApplicationAdapter {
-    Stage stage;
-
+/**
+ * Created by jeffbustercase on 09/12/16.
+ */
+public class GameStage extends Stage {
     Doge doge;
-    Image background;
+    Background background;
+    public GameStage(ScreenViewport viewport) {
+        super(viewport);
 
-    @Override
-	public void create () {
-        stage = new Stage(new ScreenViewport());
+        Gdx.input.setInputProcessor(this);
 
         // TODO: Replace img with pixelated img.
         doge = new Doge(Constants.dogeTexture);
+        background = new Background(Constants.BackgroundTextures);
 
-        // TODO: Replace with pixelated background
-        background = new Image(new Texture("./assets/background.jpg"));
-        background.setSize(stage.getWidth(), stage.getHeight());
+        background.setSize(getWidth(), getHeight());
 
-        stage.addListener(new InputListener(){
+        addActor(background);
+        addActor(doge);
+
+        addListener(new InputListener(){
             @Override
             public boolean keyDown(InputEvent event, int keycode) {
                 switch (keycode){
@@ -70,39 +74,19 @@ public class CutePuppy3 extends ApplicationAdapter {
             }
         });
 
-        stage.addAction(new Action() {
-            @Override
-            public boolean act(float delta) {
-                // Get Collision between enemy and player
-                for(Enemy enemy : Dynamic.enemies){
-                    if(doge.getBounds().contains(enemy.getBounds())){
-                        doge.tookDamageFrom();
-                        enemy.die();
-                    }
-                }
-
-
-                return false;
-            }
-        });
-
-        stage.addActor(background);
-		stage.addActor(doge);
-        Gdx.input.setInputProcessor(stage);
-
         // Start Enemy Generator at background
-        new Thread(new EnemyGenerator(stage)).start();
-	}
+        new Thread(new EnemyGenerator(this)).start();
+    }
 
-	@Override
-	public void render () {
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stage.act(Gdx.graphics.getDeltaTime());
-        stage.draw();
-	}
-	
-	@Override
-	public void dispose (){
-		stage.dispose();
-	}
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+
+        for(Enemy enemy : Dynamic.enemies){
+            if(doge.getBounds().overlaps(enemy.getBounds())){
+                doge.collisionWith(enemy);
+                enemy.die();
+            }
+        }
+    }
 }

@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.cutepuppy.game.Stages.EndGameStage;
 import com.cutepuppy.game.utils.*;
 
 /**
@@ -43,6 +45,7 @@ public class Doge extends Image {
                 activateSuperPower();
             }
         }
+        bounds.setPosition(getX()-getWidth()/2, getY()-getHeight()/2);
     }
     private void activateSuperPower() {
         /* TODO: Do thing to activate super power (i.e. show super power img and make constant damage to enemies in line) */
@@ -51,8 +54,13 @@ public class Doge extends Image {
         return bounds;
     }
     public int getId(){return id;}
-
+    public void collisionWith(Enemy enemy){
+        health-=Constants.HIT_DAMAGE;
+        System.out.println("Collision With enemy : "+enemy.getId()+", health now: "+health);
+        if(health<=0) Dynamic.currentStage = new EndGameStage(new ScreenViewport());
+    }
     public void tookDamageFrom(Enemy enemy) {
-
+        health-=enemy.getDamage();
+        if(health<=0) Dynamic.currentStage = new EndGameStage(new ScreenViewport());
     }
 }
