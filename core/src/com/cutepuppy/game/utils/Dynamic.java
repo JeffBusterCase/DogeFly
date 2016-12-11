@@ -14,6 +14,8 @@ public class Dynamic {
     public static boolean SPACE = false;
     public static boolean CAN_GENERATE_ENEMIES=true;
     public static int enemyid = 1;
+    public static int currentLevel=1;
+    public static Enemy enemy;
     public static Array<Enemy> enemies = new Array<Enemy>();
     public static Stage currentStage;
 }

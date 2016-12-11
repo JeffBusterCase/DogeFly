@@ -23,7 +23,7 @@ public class Doge extends Image {
         setSize(getWidth()/4, getHeight()/4);
         bounds = new Rectangle(getX(), getY(), getWidth(), getHeight());
         setBounds(getX(), getY(), getWidth(), getHeight());
-        setOrigin(getWidth()/4, getHeight()/4);
+        setOrigin(getWidth()/2, getHeight()/2);
         setPosition(100f, Gdx.graphics.getHeight()/2);
         setScale(-getScaleX(), getScaleY());
     }
@@ -31,9 +31,9 @@ public class Doge extends Image {
     public void act(float delta) {
         super.act(delta);
 
-        if(Dynamic.W)
+        if(Dynamic.W && getY()<=Gdx.graphics.getHeight())
             setPosition(getX(), getY()+ Constants.PlayerSpeedPower);
-        else if(Dynamic.S)
+        else if(Dynamic.S && getY()>=0)
             setPosition(getX(), getY()-Constants.PlayerSpeedPower);
 
         if(Dynamic.P)
@@ -45,7 +45,7 @@ public class Doge extends Image {
                 activateSuperPower();
             }
         }
-        bounds.setPosition(getX()-getWidth()/2, getY()-getHeight()/2);
+        bounds.setPosition(getX()-(getWidth()/2), getY()-(getHeight()/2));
     }
     private void activateSuperPower() {
         /* TODO: Do thing to activate super power (i.e. show super power img and make constant damage to enemies in line) */

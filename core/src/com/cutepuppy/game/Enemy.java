@@ -6,6 +6,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.cutepuppy.game.Stages.CompletedGameStage;
 import com.cutepuppy.game.utils.Constants;
 import com.cutepuppy.game.utils.Dynamic;
 
@@ -39,7 +41,7 @@ public class Enemy extends Image {
 
         // Constant Movement
         setPosition(getX()-Constants.EnemySpeed, getY());
-        bounds.setPosition(getX()-getWidth()/2, getY()-getY()-getHeight()/2);
+        bounds.setPosition(getX()-(getHeight()/2), getY()-(getHeight()/2));
     }
 
     public int getId() {
@@ -60,5 +62,7 @@ public class Enemy extends Image {
         remove();
         clear();
         Dynamic.enemies.removeValue(this, true);
+        if(Dynamic.enemyid-2==Constants.EnemiesThatMustBeKilledByLevel)
+            Dynamic.currentStage = new CompletedGameStage(new ScreenViewport());
     }
 }
