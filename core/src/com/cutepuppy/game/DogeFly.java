@@ -13,10 +13,12 @@ import com.cutepuppy.game.Stages.MenuStage;
 import com.cutepuppy.game.utils.Constants;
 import com.cutepuppy.game.utils.Dynamic;
 
+import java.io.*;
+
 public class DogeFly extends ApplicationAdapter {
     @Override
 	public void create () {
-        System.out.println(Constants.currentDir);
+
         Dynamic.currentStage = new MenuStage(new ScreenViewport());
 	}
 
