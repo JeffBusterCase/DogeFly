@@ -4,14 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.cutepuppy.game.Stages.CompletedGameStage;
 import com.cutepuppy.game.utils.Constants;
 import com.cutepuppy.game.utils.Dynamic;
 
-/**
+/*
  * Created by jeffbustercase on 09/12/16.
  */
 public class Enemy extends Image {
@@ -62,7 +61,9 @@ public class Enemy extends Image {
         remove();
         clear();
         Dynamic.enemies.removeValue(this, true);
-        if(Dynamic.enemyid-2==Constants.EnemiesThatMustBeKilledByLevel)
+        if(Dynamic.enemyid-2==Constants.EnemiesThatMustBeKilledByLevel){
+            Dynamic.CAN_GENERATE_ENEMIES = false;
             Dynamic.currentStage = new CompletedGameStage(new ScreenViewport());
+        }
     }
 }

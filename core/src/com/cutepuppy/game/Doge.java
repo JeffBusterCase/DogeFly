@@ -20,7 +20,7 @@ public class Doge extends Image {
         super(texture);
         superPower = false;
         health = Constants.PlayerHealth;
-        setSize(getWidth()/4, getHeight()/4);
+        setSize(getWidth()*2, getHeight()*2);
         bounds = new Rectangle(getX(), getY(), getWidth(), getHeight());
         setBounds(getX(), getY(), getWidth(), getHeight());
         setOrigin(getWidth()/2, getHeight()/2);

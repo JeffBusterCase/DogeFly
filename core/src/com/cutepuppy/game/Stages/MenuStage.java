@@ -14,7 +14,6 @@ import com.cutepuppy.game.utils.Dynamic;
  * Created by jeffbustercase on 09/12/16.
  */
 public class MenuStage extends Stage {
-    Image buttonStart, buttonQuit;
     public MenuStage(ScreenViewport viewport) {
         super(viewport);
 
@@ -22,8 +21,8 @@ public class MenuStage extends Stage {
 
         Background background = new Background(Constants.MenuBackgroundTextures);
 
-        buttonStart = new Image(Constants.ButtonStartTexture);
-        buttonQuit = new Image(Constants.ButtonQuitTexture);
+        Image buttonStart = new Image(Constants.ButtonStartTexture);
+        Image buttonQuit = new Image(Constants.ButtonQuitTexture);
 
         buttonStart.setSize(buttonStart.getWidth()/4, buttonStart.getHeight()/4);
         buttonQuit.setSize(buttonQuit.getWidth()/4, buttonQuit.getHeight()/4);

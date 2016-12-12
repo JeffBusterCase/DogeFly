@@ -9,7 +9,6 @@ import com.cutepuppy.game.utils.*;
  */
 public class EnemyGenerator implements Runnable {
     Stage stage;
-    private int level;
     public EnemyGenerator(Stage stage){
         super();
         this.stage = stage;
@@ -19,34 +18,23 @@ public class EnemyGenerator implements Runnable {
     @Override
     public void run() {
         try {
-            switch (level) {
-                case 2:
-                    startLevel2();
-                default:
-                    startLevel1();
-            }
+            main();
         } catch( InterruptedException ex) { ex.printStackTrace(); }
     }
-
-    private void startLevel1() throws InterruptedException {
-         do {
-             generateBird();
-             Thread.sleep(Constants.EnemyGenerationTime);
-         } while(Dynamic.CAN_GENERATE_ENEMIES);
-    }
-    private void startLevel2() throws InterruptedException {
+    private void main() throws InterruptedException {
         do {
-            switch (MathUtils.random(2)){
+            switch (MathUtils.random(Dynamic.currentLevel-1)){
                 case 1:
                     generateFalcon();
                 default:
                     generateBird();
             }
+            Thread.sleep(Constants.EnemyGenerationTime);
         } while(Dynamic.CAN_GENERATE_ENEMIES);
     }
     private void generateFalcon(){
         Dynamic.enemy = new Enemy(Constants.FalconTexture, Dynamic.enemyid++);
-        Dynamic.enemy.setDamage(10);
+        Dynamic.enemy.setDamage(20);
         stage.addActor(Dynamic.enemy);
         Dynamic.enemies.add(Dynamic.enemy);
     }
@@ -55,12 +43,5 @@ public class EnemyGenerator implements Runnable {
         Dynamic.enemy.setDamage(5);
         stage.addActor(Dynamic.enemy);
         Dynamic.enemies.add(Dynamic.enemy);
-    }
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
     }
 }

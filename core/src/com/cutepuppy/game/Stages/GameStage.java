@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.cutepuppy.game.Doge;
 import com.cutepuppy.game.Enemy;
 import com.cutepuppy.game.EnemyGenerator;
+import com.cutepuppy.game.Explosion;
 import com.cutepuppy.game.backgrounds.Background;
 import com.cutepuppy.game.utils.Constants;
 import com.cutepuppy.game.utils.Dynamic;
@@ -19,15 +20,19 @@ import com.cutepuppy.game.utils.Dynamic;
  */
 public class GameStage extends Stage {
     Doge doge;
-    Background background;
     public GameStage(ScreenViewport viewport) {
         super(viewport);
+        Dynamic.W = false;
+        Dynamic.S = false;
+        Dynamic.P = false;
+        Dynamic.SPACE= false;
+        Dynamic.CAN_GENERATE_ENEMIES = true;
 
         Gdx.input.setInputProcessor(this);
 
         // TODO: Replace img with pixelated img.
-        doge = new Doge(Constants.dogeTexture);
-        background = new Background(Constants.BackgroundTextures);
+        doge = new Doge(Constants.DogeTexture);
+        Background background = new Background(Constants.BackgroundTextures);
 
         background.setSize(getWidth(), getHeight());
 
@@ -83,10 +88,11 @@ public class GameStage extends Stage {
     public void act(float delta) {
         super.act(delta);
 
-        for(Enemy enemy : Dynamic.enemies){
-            if(doge.getBounds().overlaps(enemy.getBounds())){
+        for (Enemy enemy : Dynamic.enemies) {
+            if (doge.getBounds().overlaps(enemy.getBounds())) {
                 doge.collisionWith(enemy);
                 enemy.die();
+                new Thread(new Explosion(this, enemy)).start();
             }
         }
     }
