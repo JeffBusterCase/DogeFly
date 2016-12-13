@@ -5,7 +5,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.cutepuppy.game.backgrounds.Background;
 import com.cutepuppy.game.utils.Constants;
@@ -15,7 +14,7 @@ import com.cutepuppy.game.utils.Dynamic;
  * Created by jeffbustercase on 11/12/16.
  */
 public class CompletedGameStage extends Stage {
-    public CompletedGameStage(Viewport viewport) {
+    public CompletedGameStage(final Viewport viewport) {
         super(viewport);
 
         Gdx.input.setInputProcessor(this);
@@ -41,14 +40,14 @@ public class CompletedGameStage extends Stage {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 Dynamic.currentLevel++;
-                Dynamic.currentStage = new GameStage(new ScreenViewport());
+                Dynamic.currentStage = new GameStage(Constants.viewport);
             }
         });
         buttonMenu.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                Dynamic.currentStage = new MenuStage(new ScreenViewport());
+                Dynamic.currentStage = new MenuStage(Constants.viewport);
             }
         });
 

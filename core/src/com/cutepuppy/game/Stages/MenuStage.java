@@ -10,7 +10,7 @@ import com.cutepuppy.game.backgrounds.Background;
 import com.cutepuppy.game.utils.Constants;
 import com.cutepuppy.game.utils.Dynamic;
 
-/**
+/*
  * Created by jeffbustercase on 09/12/16.
  */
 public class MenuStage extends Stage {
@@ -37,7 +37,7 @@ public class MenuStage extends Stage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                Dynamic.currentStage = new GameStage(new ScreenViewport());
+                Dynamic.currentStage = new GameStage(Constants.viewport);
             }
         });
 

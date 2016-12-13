@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.cutepuppy.game.Stages.CompletedGameStage;
 import com.cutepuppy.game.utils.Constants;
 import com.cutepuppy.game.utils.Dynamic;
@@ -19,7 +18,7 @@ public class Enemy extends Image {
     private Rectangle bounds;
 
 
-    public Enemy(Texture texture, int id){
+    Enemy(Texture texture, int id){
         super(texture);
         this.id = id;
         damage=0;
@@ -28,7 +27,7 @@ public class Enemy extends Image {
         bounds = new Rectangle(getX(), getY(), getWidth(), getHeight());
         setBounds(getX(), getY(), getWidth(), getHeight());
         setOrigin(getWidth()/2, getHeight()/2);
-        setPosition(Gdx.graphics.getWidth()+getWidth(), MathUtils.random(0f, Gdx.graphics.getHeight()-(getHeight()/2)));
+        setPosition(Gdx.graphics.getWidth()+getWidth(), MathUtils.random(Gdx.graphics.getHeight()-(getHeight()/2)));
     }
 
     @Override
@@ -63,7 +62,8 @@ public class Enemy extends Image {
         Dynamic.enemies.removeValue(this, true);
         if(Dynamic.enemyid-2==Constants.EnemiesThatMustBeKilledByLevel){
             Dynamic.CAN_GENERATE_ENEMIES = false;
-            Dynamic.currentStage = new CompletedGameStage(new ScreenViewport());
+            Dynamic.enemyGeneratorThread.interrupt();
+            Dynamic.currentStage = new CompletedGameStage(Constants.viewport);
         }
     }
 }

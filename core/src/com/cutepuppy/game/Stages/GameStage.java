@@ -2,9 +2,12 @@ package com.cutepuppy.game.Stages;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.cutepuppy.game.Doge;
 import com.cutepuppy.game.Enemy;
@@ -15,12 +18,14 @@ import com.cutepuppy.game.utils.Constants;
 import com.cutepuppy.game.utils.Dynamic;
 
 
-/**
+/*
  * Created by jeffbustercase on 09/12/16.
  */
 public class GameStage extends Stage {
-    Doge doge;
-    public GameStage(ScreenViewport viewport) {
+    private Doge doge;
+    private Background background;
+    private Label enemiesYetLabel;
+    GameStage(ScreenViewport viewport) {
         super(viewport);
         Dynamic.W = false;
         Dynamic.S = false;
@@ -29,15 +34,23 @@ public class GameStage extends Stage {
         Dynamic.CAN_GENERATE_ENEMIES = true;
 
         Gdx.input.setInputProcessor(this);
+        Label.LabelStyle ls = new Label.LabelStyle(new BitmapFont(),  Color.BLACK);
+        enemiesYetLabel = new Label("Enemies : "+(Dynamic.enemyid-2),
+               ls);
+        enemiesYetLabel.setBounds(enemiesYetLabel.getX(), enemiesYetLabel.getY(),
+                enemiesYetLabel.getWidth(), enemiesYetLabel.getHeight());
 
-        // TODO: Replace img with pixelated img.
+        enemiesYetLabel.setOrigin(enemiesYetLabel.getWidth()/2, enemiesYetLabel.getHeight()/2);
+        enemiesYetLabel.setPosition(getWidth()/2, getHeight()-enemiesYetLabel.getHeight()*2);
+
         doge = new Doge(Constants.DogeTexture);
-        Background background = new Background(Constants.BackgroundTextures);
+        background = new Background(Constants.BackgroundTextures);
 
         background.setSize(getWidth(), getHeight());
 
         addActor(background);
         addActor(doge);
+        addActor(enemiesYetLabel);
 
         addListener(new InputListener(){
             @Override
@@ -81,7 +94,8 @@ public class GameStage extends Stage {
         });
 
         // Start Enemy Generator at background
-        new Thread(new EnemyGenerator(this)).start();
+        Dynamic.enemyGeneratorThread = new Thread(new EnemyGenerator(this));
+        Dynamic.enemyGeneratorThread.start();
     }
 
     @Override
@@ -95,5 +109,7 @@ public class GameStage extends Stage {
                 new Thread(new Explosion(this, enemy)).start();
             }
         }
+
+        enemiesYetLabel.setText("Enemies : "+(Dynamic.enemyid-2));
     }
 }

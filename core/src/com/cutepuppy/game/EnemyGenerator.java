@@ -2,9 +2,10 @@ package com.cutepuppy.game;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.cutepuppy.game.utils.*;
+import com.cutepuppy.game.utils.Constants;
+import com.cutepuppy.game.utils.Dynamic;
 
-/**
+/*
  * Created by jeffbustercase on 09/12/16.
  */
 public class EnemyGenerator implements Runnable {

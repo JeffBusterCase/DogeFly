@@ -4,11 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.cutepuppy.game.Stages.EndGameStage;
-import com.cutepuppy.game.utils.*;
+import com.cutepuppy.game.utils.Constants;
+import com.cutepuppy.game.utils.Dynamic;
 
-/**
+/*
  * Created by jeffbustercase on 06/12/16.
  */
 public class Doge extends Image {
@@ -57,10 +57,10 @@ public class Doge extends Image {
     public void collisionWith(Enemy enemy){
         health-=Constants.HIT_DAMAGE;
         System.out.println("Collision With enemy : "+enemy.getId()+", health now: "+health);
-        if(health<=0) Dynamic.currentStage = new EndGameStage(new ScreenViewport());
+        if(health<=0) Dynamic.currentStage = new EndGameStage(Constants.viewport);
     }
     public void tookDamageFrom(Enemy enemy) {
         health-=enemy.getDamage();
-        if(health<=0) Dynamic.currentStage = new EndGameStage(new ScreenViewport());
+        if(health<=0) Dynamic.currentStage = new EndGameStage(Constants.viewport);
     }
 }
