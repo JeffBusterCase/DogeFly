@@ -31,7 +31,7 @@ public class Doge extends Image {
     public void act(float delta) {
         super.act(delta);
 
-        if(Dynamic.W && getY()<=Gdx.graphics.getHeight())
+        if(Dynamic.W && getY()<=Gdx.graphics.getHeight()-getHeight())
             setPosition(getX(), getY()+ Constants.PlayerSpeedPower);
         else if(Dynamic.S && getY()>=0)
             setPosition(getX(), getY()-Constants.PlayerSpeedPower);
@@ -56,11 +56,15 @@ public class Doge extends Image {
     public int getId(){return id;}
     public void collisionWith(Enemy enemy){
         health-=Constants.HIT_DAMAGE;
-        System.out.println("Collision With enemy : "+enemy.getId()+", health now: "+health);
         if(health<=0) Dynamic.currentStage = new EndGameStage(Constants.viewport);
     }
-    public void tookDamageFrom(Enemy enemy) {
-        health-=enemy.getDamage();
-        if(health<=0) Dynamic.currentStage = new EndGameStage(Constants.viewport);
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+        if(health<1) Dynamic.currentStage = new EndGameStage(Constants.viewport);
     }
 }

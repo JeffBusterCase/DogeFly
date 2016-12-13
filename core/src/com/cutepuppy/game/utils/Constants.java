@@ -16,7 +16,7 @@ public final class Constants {
 
     public static final ScreenViewport viewport = new ScreenViewport();
 
-    public static final Texture DogeTexture = new Texture("./assets/doge.png");
+    public static final Texture DogeTexture = new Texture("./assets/player/doge.png");
     public static final Texture ExplosionTexture = new Texture("./assets/explosion.png");
     public static final Texture BirdTexture = new Texture("./assets/bird/bird-f1.png");
     public static final Texture FalconTexture = new Texture("./assets/falcon/falcon-f1.png");
@@ -25,8 +25,9 @@ public final class Constants {
     public static final Texture ButtonMenuTexture = new Texture("./assets/buttons/menu.png");
     public static final Texture ButtonRetryTexture = new Texture("./assets/buttons/retry.png");
     public static final Texture ButtonQuitTexture = new Texture("./assets/buttons/quit.png");
-    public static final Texture[] BackgroundTextures = {new Texture("./assets/gameBackground.png")};
-    public static final Texture[] MenuBackgroundTextures = {new Texture("./assets/menuBackground.png")};
-    public static final Texture[] EndGameBackgroundTextures = {new Texture("./assets/endGameBackground.png")};
-    public static final Texture[] WinBackgroundTextures = {new Texture("./assets/winGameBackground.png")};
+    public static final Texture[] BackgroundTextures = {new Texture("./assets/backgrounds/gameBackground.png")};
+    public static final Texture[] SkyBackgroundTextures = {new Texture("./assets/backgrounds/skyBackgroundTexture.png")};
+    public static final Texture[] MenuBackgroundTextures = {new Texture("./assets/backgrounds/menuBackground.png")};
+    public static final Texture[] EndGameBackgroundTextures = {new Texture("./assets/backgrounds/endGameBackground.png")};
+    public static final Texture[] WinBackgroundTextures = {new Texture("./assets/backgrounds/winGameBackground.png")};
 }

@@ -16,7 +16,14 @@ public class DogeFly extends ApplicationAdapter {
 	@Override
 	public void render () {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        Dynamic.currentStage.act(Gdx.graphics.getDeltaTime());
+
+        try {
+
+            Dynamic.currentStage.act(Gdx.graphics.getDeltaTime());
+
+        }
+        catch (NullPointerException ex) {System.out.println("WARNING : NullPointerException on `Gdx.graphics.getDeltaTime();`(Skipping stage action)");}
+
         Dynamic.currentStage.draw();
 	}
 

@@ -24,7 +24,7 @@ import com.cutepuppy.game.utils.Dynamic;
 public class GameStage extends Stage {
     private Doge doge;
     private Background background;
-    private Label enemiesYetLabel;
+    private Label dogeHealthLabel, enemiesYetLabel;
     GameStage(ScreenViewport viewport) {
         super(viewport);
         Dynamic.W = false;
@@ -44,13 +44,28 @@ public class GameStage extends Stage {
         enemiesYetLabel.setPosition(getWidth()/2, getHeight()-enemiesYetLabel.getHeight()*2);
 
         doge = new Doge(Constants.DogeTexture);
-        background = new Background(Constants.BackgroundTextures);
+
+        dogeHealthLabel = new Label("Health : "+doge.getHealth(), ls);
+
+        dogeHealthLabel.setBounds(dogeHealthLabel.getX(), dogeHealthLabel.getY(), dogeHealthLabel.getWidth(), dogeHealthLabel.getHeight());
+        dogeHealthLabel.setOrigin(dogeHealthLabel.getWidth()/2, dogeHealthLabel.getHeight()/2);
+        dogeHealthLabel.setPosition(getWidth()/2, getHeight()-(enemiesYetLabel.getHeight()*2)-dogeHealthLabel.getHeight());
+
+        // Background Selection
+        switch (Dynamic.currentLevel){
+            case (2):
+                background = new Background(Constants.SkyBackgroundTextures);
+                break;
+            default:
+                background = new Background(Constants.BackgroundTextures);
+        }
 
         background.setSize(getWidth(), getHeight());
 
         addActor(background);
         addActor(doge);
         addActor(enemiesYetLabel);
+        addActor(dogeHealthLabel);
 
         addListener(new InputListener(){
             @Override
@@ -104,7 +119,8 @@ public class GameStage extends Stage {
 
         for (Enemy enemy : Dynamic.enemies) {
             if (doge.getBounds().overlaps(enemy.getBounds())) {
-                doge.collisionWith(enemy);
+                doge.setHealth(doge.getHealth()-Constants.HIT_DAMAGE);
+                dogeHealthLabel.setText("Health : "+doge.getHealth());
                 enemy.die();
                 new Thread(new Explosion(this, enemy)).start();
             }
