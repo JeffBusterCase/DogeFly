@@ -9,10 +9,10 @@ import com.cutepuppy.game.utils.Constants;
  */
 public class Explosion implements Runnable {
     private GameStage stage;
-    private Enemy enemy;
-    public Explosion(GameStage stage, Enemy enemy){
+    private float[] pos;
+    public Explosion(GameStage stage, float xpos, float ypos){
         this.stage = stage;
-        this.enemy = enemy;
+        this.pos = new float[]{xpos, ypos};
     }
     @Override
     public void run() {
@@ -23,10 +23,7 @@ public class Explosion implements Runnable {
     private void main() throws InterruptedException {
         Image explosion = new Image(Constants.ExplosionTexture);
         explosion.setSize(explosion.getWidth()/4, explosion.getHeight()/4);
-        explosion.setPosition(
-                enemy.getX(),
-                enemy.getY()
-        );
+        explosion.setPosition(pos[0], pos[1]);
         stage.addActor(explosion);
         Thread.sleep(500);
         explosion.remove();

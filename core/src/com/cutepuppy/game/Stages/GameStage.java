@@ -9,10 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.cutepuppy.game.Doge;
-import com.cutepuppy.game.Enemy;
-import com.cutepuppy.game.EnemyGenerator;
-import com.cutepuppy.game.Explosion;
+import com.cutepuppy.game.*;
 import com.cutepuppy.game.backgrounds.Background;
 import com.cutepuppy.game.utils.Constants;
 import com.cutepuppy.game.utils.Dynamic;
@@ -23,14 +20,11 @@ import com.cutepuppy.game.utils.Dynamic;
  */
 public class GameStage extends Stage {
     private Doge doge;
-    private Background background;
     private Label dogeHealthLabel, enemiesYetLabel;
     GameStage(ScreenViewport viewport) {
         super(viewport);
         Dynamic.W = false;
         Dynamic.S = false;
-        Dynamic.P = false;
-        Dynamic.SPACE= false;
         Dynamic.CAN_GENERATE_ENEMIES = true;
 
         Gdx.input.setInputProcessor(this);
@@ -50,6 +44,8 @@ public class GameStage extends Stage {
         dogeHealthLabel.setBounds(dogeHealthLabel.getX(), dogeHealthLabel.getY(), dogeHealthLabel.getWidth(), dogeHealthLabel.getHeight());
         dogeHealthLabel.setOrigin(dogeHealthLabel.getWidth()/2, dogeHealthLabel.getHeight()/2);
         dogeHealthLabel.setPosition(getWidth()/2, getHeight()-(enemiesYetLabel.getHeight()*2)-dogeHealthLabel.getHeight());
+
+        Background background;
 
         // Background Selection
         switch (Dynamic.currentLevel){
@@ -77,12 +73,6 @@ public class GameStage extends Stage {
                     case(Input.Keys.S):
                         Dynamic.S=true;
                         break;
-                    case(Input.Keys.P):
-                        Dynamic.P=true;
-                        break;
-                    case(Input.Keys.SPACE):
-                        Dynamic.SPACE=true;
-                        break;
                 }
                 return false;
             }
@@ -97,12 +87,6 @@ public class GameStage extends Stage {
                     case(Input.Keys.S):
                         Dynamic.S=false;
                         break;
-                    case(Input.Keys.P):
-                        Dynamic.P=false;
-                        break;
-                    case(Input.Keys.SPACE):
-                        Dynamic.SPACE=false;
-                        break;
                 }
                 return false;
             }
@@ -116,16 +100,35 @@ public class GameStage extends Stage {
     @Override
     public void act(float delta) {
         super.act(delta);
+        getCurrentInputKey();
+
+
+        for (Attack attack : Dynamic.attacks){
+            attack.setPosition(attack.getX()+Constants.AttackVel, attack.getY());
+            for (Enemy enemy : Dynamic.enemies)
+                if(attack.getBounds().overlaps(enemy.getBounds())){
+                    new Thread(new Explosion(this, enemy.getX(), enemy.getY())).start();
+                    enemy.die();
+                    attack.destroy();
+                    break;
+                }
+        }
 
         for (Enemy enemy : Dynamic.enemies) {
             if (doge.getBounds().overlaps(enemy.getBounds())) {
                 doge.setHealth(doge.getHealth()-Constants.HIT_DAMAGE);
                 dogeHealthLabel.setText("Health : "+doge.getHealth());
+                new Thread(new Explosion(this, enemy.getX(), enemy.getY())).start();
                 enemy.die();
-                new Thread(new Explosion(this, enemy)).start();
             }
         }
 
         enemiesYetLabel.setText("Enemies : "+(Dynamic.enemyid-2));
+    }
+    private void getCurrentInputKey(){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.P))
+            doge.throwHarpoon();
+        else if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
+            doge.activateSuperPower();
     }
 }

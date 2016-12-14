@@ -15,7 +15,7 @@ public class Doge extends Image {
     private int health;
     private boolean superPower;
     private Rectangle bounds;
-    public static final int id = 0;
+    static final int id = 0;
     public Doge(Texture texture) {
         super(texture);
         superPower = false;
@@ -36,19 +36,7 @@ public class Doge extends Image {
         else if(Dynamic.S && getY()>=0)
             setPosition(getX(), getY()-Constants.PlayerSpeedPower);
 
-        if(Dynamic.P)
-            System.out.println("Normal Power Activated");
-        if(Dynamic.SPACE){
-            if(!superPower){
-                superPower=true;
-                System.out.println("Super Power Activated");
-                activateSuperPower();
-            }
-        }
         bounds.setPosition(getX()-(getWidth()/2), getY()-(getHeight()/2));
-    }
-    private void activateSuperPower() {
-        /* TODO: Do thing to activate super power (i.e. show super power img and make constant damage to enemies in line) */
     }
     public Rectangle getBounds(){
         return bounds;
@@ -66,5 +54,11 @@ public class Doge extends Image {
     public void setHealth(int health) {
         this.health = health;
         if(health<1) Dynamic.currentStage = new EndGameStage(Constants.viewport);
+    }
+    public void throwHarpoon(){
+        new Attack(Constants.HarpoonTexture, getY());
+    }
+    public void activateSuperPower() {
+        /* TODO: Do thing to activate super power (i.e. show super power img and make constant damage to enemies in line) */
     }
 }
