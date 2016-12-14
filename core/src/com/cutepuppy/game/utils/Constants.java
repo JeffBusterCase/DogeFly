@@ -32,4 +32,5 @@ public final class Constants {
     public static final Texture[] MenuBackgroundTextures = {new Texture("./assets/backgrounds/menuBackground.png")};
     public static final Texture[] EndGameBackgroundTextures = {new Texture("./assets/backgrounds/endGameBackground.png")};
     public static final Texture[] WinBackgroundTextures = {new Texture("./assets/backgrounds/winGameBackground.png")};
+    public static int HarpoonStartQuantity = 10;
 }

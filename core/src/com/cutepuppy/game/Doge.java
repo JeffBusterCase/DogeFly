@@ -16,10 +16,14 @@ public class Doge extends Image {
     private boolean superPower;
     private Rectangle bounds;
     static final int id = 0;
+
+    // Attacks
+    private int harpoonQuantity;
     public Doge(Texture texture) {
         super(texture);
         superPower = false;
         health = Constants.PlayerHealth;
+        harpoonQuantity = Constants.HarpoonStartQuantity;
         setSize(getWidth()*2, getHeight()*2);
         bounds = new Rectangle(getX(), getY(), getWidth(), getHeight());
         setBounds(getX(), getY(), getWidth(), getHeight());
@@ -56,9 +60,15 @@ public class Doge extends Image {
         if(health<1) Dynamic.currentStage = new EndGameStage(Constants.viewport);
     }
     public void throwHarpoon(){
-        new Attack(Constants.HarpoonTexture, getY());
+        if (harpoonQuantity>0)  {
+            new Attack(Constants.HarpoonTexture, getY());
+            harpoonQuantity--;
+        }
     }
     public void activateSuperPower() {
         /* TODO: Do thing to activate super power (i.e. show super power img and make constant damage to enemies in line) */
+    }
+    public int getHarpoonQuantity(){
+        return harpoonQuantity;
     }
 }
