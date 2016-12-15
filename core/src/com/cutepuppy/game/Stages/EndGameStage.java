@@ -7,8 +7,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.cutepuppy.game.backgrounds.Background;
-import com.cutepuppy.game.utils.Constants;
-import com.cutepuppy.game.utils.Dynamic;
+import com.cutepuppy.game.open.Constants;
+import com.cutepuppy.game.open.Dynamic;
 
 /*
  * Created by jeffbustercase on 09/12/16.

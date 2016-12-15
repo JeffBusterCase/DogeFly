@@ -4,8 +4,8 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.cutepuppy.game.Stages.MenuStage;
-import com.cutepuppy.game.utils.Constants;
-import com.cutepuppy.game.utils.Dynamic;
+import com.cutepuppy.game.open.Constants;
+import com.cutepuppy.game.open.Dynamic;
 
 public class DogeFly extends ApplicationAdapter {
     @Override

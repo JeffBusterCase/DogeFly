@@ -3,16 +3,14 @@ package com.cutepuppy.game.Stages;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.cutepuppy.game.*;
 import com.cutepuppy.game.backgrounds.Background;
-import com.cutepuppy.game.utils.Constants;
-import com.cutepuppy.game.utils.Dynamic;
+import com.cutepuppy.game.open.Constants;
+import com.cutepuppy.game.open.Dynamic;
 
 
 /*
@@ -23,8 +21,7 @@ public class GameStage extends Stage {
     private Label dogeHealthLabel, enemiesYetLabel, harpoonsQuantity;
     GameStage(ScreenViewport viewport) {
         super(viewport);
-        Dynamic.W = false;
-        Dynamic.S = false;
+
         Dynamic.CAN_GENERATE_ENEMIES = true;
 
         Gdx.input.setInputProcessor(this);
@@ -54,35 +51,6 @@ public class GameStage extends Stage {
         addActor(enemiesYetLabel);
         addActor(dogeHealthLabel);
         addActor(harpoonsQuantity);
-
-        addListener(new InputListener(){
-            @Override
-            public boolean keyDown(InputEvent event, int keycode) {
-                switch (keycode){
-                    case(Input.Keys.W):
-                        Dynamic.W=true;
-                        break;
-                    case(Input.Keys.S):
-                        Dynamic.S=true;
-                        break;
-                }
-                return false;
-            }
-
-            @Override
-            public boolean keyUp(InputEvent event, int keycode) {
-
-                switch (keycode){
-                    case(Input.Keys.W):
-                        Dynamic.W=false;
-                        break;
-                    case(Input.Keys.S):
-                        Dynamic.S=false;
-                        break;
-                }
-                return false;
-            }
-        });
 
         // Start Enemy Generator at background
         Dynamic.enemyGeneratorThread = new Thread(new EnemyGenerator(this));
@@ -123,9 +91,20 @@ public class GameStage extends Stage {
             doge.throwHarpoon();
         else if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
             doge.activateSuperPower();
+
+        if(Gdx.input.isKeyPressed(Input.Keys.W))
+            doge.setPosition(doge.getX(), doge.getY()+Constants.PlayerSpeedPower);
+        else if (Gdx.input.isKeyPressed(Input.Keys.S))
+            doge.setPosition(doge.getX(), doge.getY()-Constants.PlayerSpeedPower);
     }
     private static Label createLabel(String text, float x, float y, Color color){
-        Label label = new Label(text, new Label.LabelStyle(new BitmapFont(),  color));
+        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(
+                Gdx.files.internal("./assets/fonts/emulogic/emulogic.ttf"));
+
+        FreeTypeFontGenerator.FreeTypeFontParameter fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        fontParameter.size = 16;
+
+        Label label = new Label(text, new Label.LabelStyle(fontGenerator.generateFont(fontParameter),  color));
         label.setBounds(label.getX(), label.getY(), label.getWidth(), label.getHeight());
         label.setOrigin(label.getWidth()/2, label.getHeight()/2);
         label.setPosition(x, y);

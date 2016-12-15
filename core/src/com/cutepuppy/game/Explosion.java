@@ -2,7 +2,7 @@ package com.cutepuppy.game;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.cutepuppy.game.Stages.GameStage;
-import com.cutepuppy.game.utils.Constants;
+import com.cutepuppy.game.open.Constants;
 
 /*
  * Created by jeffbustercase on 11/12/16.

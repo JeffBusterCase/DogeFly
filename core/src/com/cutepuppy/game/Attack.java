@@ -3,7 +3,7 @@ package com.cutepuppy.game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.cutepuppy.game.utils.Dynamic;
+import com.cutepuppy.game.open.Dynamic;
 
 /**
  * Created by jeffbustercase on 13/12/16.

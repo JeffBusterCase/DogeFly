@@ -5,8 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.cutepuppy.game.Stages.EndGameStage;
-import com.cutepuppy.game.utils.Constants;
-import com.cutepuppy.game.utils.Dynamic;
+import com.cutepuppy.game.open.Constants;
+import com.cutepuppy.game.open.Dynamic;
 
 /*
  * Created by jeffbustercase on 06/12/16.
@@ -34,11 +34,6 @@ public class Doge extends Image {
     @Override
     public void act(float delta) {
         super.act(delta);
-
-        if(Dynamic.W && getY()<=Gdx.graphics.getHeight()-getHeight())
-            setPosition(getX(), getY()+ Constants.PlayerSpeedPower);
-        else if(Dynamic.S && getY()>=0)
-            setPosition(getX(), getY()-Constants.PlayerSpeedPower);
 
         bounds.setPosition(getX()-(getWidth()/2), getY()-(getHeight()/2));
     }

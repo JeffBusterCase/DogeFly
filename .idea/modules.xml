@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CutePuppy3.iml" filepath="$PROJECT_DIR$/.idea/modules/CutePuppy3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DOGEFLY.iml" filepath="$PROJECT_DIR$/.idea/modules/DOGEFLY.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/DogeFly.iml" filepath="$PROJECT_DIR$/.idea/modules/DogeFly.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/core.iml" group="core" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/core_main.iml" filepath="$PROJECT_DIR$/.idea/modules/core/core_main.iml" group="core" />
