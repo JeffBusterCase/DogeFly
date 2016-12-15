@@ -1,6 +1,7 @@
 package com.cutepuppy.game.Stages;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -18,13 +19,16 @@ public class CompletedGameStage extends Stage {
         super(viewport);
 
         Gdx.input.setInputProcessor(this);
-
-        Background background = new Background(Constants.WinBackgroundTextures);
+        
+        Dynamic.AssetManager.loadWinGameAssets();
+        Dynamic.AssetManager.finishLoading();
+        
+        Background background = new Background(Dynamic.AssetManager.get("backgrounds/winGameBackgroundTexture", Texture.class));
 
         // TODO: Show spec of the game
 
-        Image buttonNextLevel = new Image(Constants.ButtonNextLevelTexture);
-        Image buttonMenu = new Image(Constants.ButtonMenuTexture);
+        Image buttonNextLevel = new Image(Dynamic.AssetManager.get("buttons/nextLevel.png", Texture.class));
+        Image buttonMenu = new Image(Dynamic.AssetManager.get("buttons/menu.png", Texture.class));
 
         buttonNextLevel.setSize(buttonNextLevel.getWidth()/4, buttonNextLevel.getHeight()/4);
         buttonMenu.setSize(buttonMenu.getWidth()/4, buttonMenu.getHeight()/4);
