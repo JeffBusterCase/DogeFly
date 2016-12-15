@@ -18,13 +18,16 @@ public class EndGameStage extends Stage {
         super(viewport);
 
         Gdx.input.setInputProcessor(this);
-
-        Background background = new Background(Constants.EndGameBackgroundTextures);
+        
+        Dynamic.AssetManager.loadLostGameAssets();
+        Dynamic.AssetManager.finishLoading();
+        
+        Background background = new Background(Dynamic.AssetManager.get("backgrounds/endGameBackground.png", Texture.class));
         background.setSize(getWidth(), getHeight());
 
-        Image buttonMenu = new Image(Constants.ButtonMenuTexture);
-        Image buttonRetry = new Image(Constants.ButtonRetryTexture);
-        Image buttonQuit = new Image(Constants.ButtonQuitTexture);
+        Image buttonMenu = new Image(Dynamic.AssetManager.get("buttons/menu.png", Texture.class));
+        Image buttonRetry = new Image(Dynamic.AssetManager.get("buttons/retry.png", Texture.class));
+        Image buttonQuit = new Image(Dynamic.AssetManager.get("buttons/quit.png", Texture.class));
 
         buttonMenu.setSize(buttonMenu.getWidth()/4, buttonMenu.getHeight()/4);
         buttonRetry.setSize(buttonRetry.getWidth()/4, buttonRetry.getHeight()/4);
