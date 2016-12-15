@@ -1,6 +1,7 @@
 package com.cutepuppy.game.Stages;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -18,11 +19,13 @@ public class MenuStage extends Stage {
         super(viewport);
 
         Gdx.input.setInputProcessor(this);
+        
+        Dynamic.AssetManager.loadMainMenuAssets();
+        
+        Background background = new Background(Dynamic.AssetManager.get("backgrounds/menuBackgroundTexture.png", Texture.class));
 
-        Background background = new Background(Constants.MenuBackgroundTextures);
-
-        Image buttonStart = new Image(Constants.ButtonStartTexture);
-        Image buttonQuit = new Image(Constants.ButtonQuitTexture);
+        Image buttonStart = new Image(Dynamic.AssetManager.get("buttons/start.png", Texture.class));
+        Image buttonQuit = new Image(Dynamic.AssetManager.get("buttons/quit.png", Texture.class));
 
         buttonStart.setSize(buttonStart.getWidth()/4, buttonStart.getHeight()/4);
         buttonQuit.setSize(buttonQuit.getWidth()/4, buttonQuit.getHeight()/4);
