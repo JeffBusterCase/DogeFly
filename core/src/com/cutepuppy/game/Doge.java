@@ -13,12 +13,11 @@ import com.cutepuppy.game.open.Dynamic;
  */
 public class Doge extends Image {
     private int health;
-    private boolean superPower;
     private Rectangle bounds;
-    static final int id = 0;
 
     // Attacks
     private int harpoonQuantity;
+    private boolean canUseSuperPower;
     public Doge(Texture texture) {
         super(texture);
         superPower = false;
