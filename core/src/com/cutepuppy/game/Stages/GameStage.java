@@ -26,22 +26,28 @@ public class GameStage extends Stage {
 
         Gdx.input.setInputProcessor(this);
         enemiesYetLabel = createLabel("Enemies : "+(Dynamic.enemyid-2), getWidth()/2, getHeight()-20, Color.BLACK);
-
-        doge = new Doge(Constants.DogeTexture);
+        
+        // Load Default (For any level) assets
+        Dynamic.AssetManager.loadDefaultGameAssets();
+        
+        doge = new Doge(Dynamic.AssetManager.get("player/doge.png", Texture.class));
 
         dogeHealthLabel = createLabel("Health : "+doge.getHealth(), getWidth()/2, getHeight()-(enemiesYetLabel.getHeight()*2)-20, Color.BLACK);
 
         harpoonsQuantity = createLabel("Harpoons : "+doge.getHarpoonQuantity(), getWidth()/2, getHeight()-(enemiesYetLabel.getHeight()*3)-20, Color.RED);
 
         Background background;
-
-        // Background Selection
+        
+        
+        // Level Textures loader and Background Selection depending on the current level
         switch (Dynamic.currentLevel){
             case (2):
-                background = new Background(Constants.SkyBackgroundTextures);
+                Dynamic.AssetManager.loadLevel2Assets();
+                background = new Background(Dynamic.AssetManager.get("backgrounds/skyBackgroundTexture.png", Texture.class));
                 break;
             default:
-                background = new Background(Constants.BackgroundTextures);
+                Dynamic.AssetManager.loadLevel1Assets();
+                background = new Background(Dynamic.AssetManager.get("backgrounds/gameBackground.png", Texture.class));
         }
 
         background.setSize(getWidth(), getHeight());
