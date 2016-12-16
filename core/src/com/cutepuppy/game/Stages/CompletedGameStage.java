@@ -20,15 +20,15 @@ public class CompletedGameStage extends Stage {
 
         Gdx.input.setInputProcessor(this);
         
-        Dynamic.AssetManager.loadWinGameAssets();
-        Dynamic.AssetManager.finishLoading();
+        Dynamic.assetManager.loadWinGameAssets();
+        Dynamic.assetManager.finishLoading();
         
-        Background background = new Background(Dynamic.AssetManager.get("backgrounds/winGameBackgroundTexture", Texture.class));
+        Background background = new Background(Dynamic.assetManager.get("backgrounds/winGameBackground.png", Texture.class));
 
         // TODO: Show spec of the game
 
-        Image buttonNextLevel = new Image(Dynamic.AssetManager.get("buttons/nextLevel.png", Texture.class));
-        Image buttonMenu = new Image(Dynamic.AssetManager.get("buttons/menu.png", Texture.class));
+        Image buttonNextLevel = new Image(Dynamic.assetManager.get("buttons/nextLevel.png", Texture.class));
+        Image buttonMenu = new Image(Dynamic.assetManager.get("buttons/menu.png", Texture.class));
 
         buttonNextLevel.setSize(buttonNextLevel.getWidth()/4, buttonNextLevel.getHeight()/4);
         buttonMenu.setSize(buttonMenu.getWidth()/4, buttonMenu.getHeight()/4);

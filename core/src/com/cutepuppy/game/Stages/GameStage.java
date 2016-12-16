@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader.FreeTypeFontLoaderParameter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -26,12 +26,13 @@ public class GameStage extends Stage {
         Dynamic.CAN_GENERATE_ENEMIES = true;
 
         Gdx.input.setInputProcessor(this);
-        enemiesYetLabel = createLabel("Enemies : "+(Dynamic.enemyid-2), getWidth()/2, getHeight()-20, Color.BLACK);
         
         // Load Default (For any level) assets
-        Dynamic.AssetManager.loadDefaultGameAssets();
-        
-        doge = new Doge(Dynamic.AssetManager.get("player/doge.png", Texture.class));
+        Dynamic.assetManager.loadDefaultGameAssets();
+
+        enemiesYetLabel = createLabel("Enemies : "+(Dynamic.enemyid-2), getWidth()/2, getHeight()-20, Color.BLACK);
+
+        doge = new Doge(Dynamic.assetManager.get("player/doge.png", Texture.class));
 
         dogeHealthLabel = createLabel("Health : "+doge.getHealth(), getWidth()/2, getHeight()-(enemiesYetLabel.getHeight()*2)-20, Color.BLACK);
 
@@ -43,12 +44,12 @@ public class GameStage extends Stage {
         // Level Textures loader and Background Selection depending on the current level
         switch (Dynamic.currentLevel){
             case (2):
-                Dynamic.AssetManager.loadLevel2Assets();
-                background = new Background(Dynamic.AssetManager.get("backgrounds/skyBackgroundTexture.png", Texture.class));
+                Dynamic.assetManager.loadLevel2Assets();
+                background = new Background(Dynamic.assetManager.get("backgrounds/skyBackgroundTexture.png", Texture.class));
                 break;
             default:
-                Dynamic.AssetManager.loadLevel1Assets();
-                background = new Background(Dynamic.AssetManager.get("backgrounds/gameBackground.png", Texture.class));
+                Dynamic.assetManager.loadLevel1Assets();
+                background = new Background(Dynamic.assetManager.get("backgrounds/gameBackground.png", Texture.class));
         }
 
         background.setSize(getWidth(), getHeight());
@@ -105,13 +106,12 @@ public class GameStage extends Stage {
             doge.setPosition(doge.getX(), doge.getY()-Constants.PlayerSpeedPower);
     }
     private static Label createLabel(String text, float x, float y, Color color){
-        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(
-                Gdx.files.internal("./assets/fonts/emulogic/emulogic.ttf"));
 
-        FreeTypeFontGenerator.FreeTypeFontParameter fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        fontParameter.size = 16;
+        FreeTypeFontLoaderParameter fontParameter = new FreeTypeFontLoaderParameter();
+        fontParameter.fontFileName = "fonts/emulogic/emulogic.ttf";
+        fontParameter.fontParameters.size = 16;
 
-        Label label = new Label(text, new Label.LabelStyle(fontGenerator.generateFont(fontParameter),  color));
+        Label label = new Label(text, new Label.LabelStyle(Dynamic.assetManager.getFont(fontParameter), color));
         label.setBounds(label.getX(), label.getY(), label.getWidth(), label.getHeight());
         label.setOrigin(label.getWidth()/2, label.getHeight()/2);
         label.setPosition(x, y);

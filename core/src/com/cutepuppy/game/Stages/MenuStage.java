@@ -20,12 +20,12 @@ public class MenuStage extends Stage {
 
         Gdx.input.setInputProcessor(this);
         
-        Dynamic.AssetManager.loadMainMenuAssets();
-        
-        Background background = new Background(Dynamic.AssetManager.get("backgrounds/menuBackgroundTexture.png", Texture.class));
+        Dynamic.assetManager.loadMainMenuAssets();
 
-        Image buttonStart = new Image(Dynamic.AssetManager.get("buttons/start.png", Texture.class));
-        Image buttonQuit = new Image(Dynamic.AssetManager.get("buttons/quit.png", Texture.class));
+        Background background = new Background(Dynamic.assetManager.get("backgrounds/menuBackground.png", Texture.class));
+
+        Image buttonStart = new Image(Dynamic.assetManager.get("buttons/start.png", Texture.class));
+        Image buttonQuit = new Image(Dynamic.assetManager.get("buttons/quit.png", Texture.class));
 
         buttonStart.setSize(buttonStart.getWidth()/4, buttonStart.getHeight()/4);
         buttonQuit.setSize(buttonQuit.getWidth()/4, buttonQuit.getHeight()/4);

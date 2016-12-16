@@ -1,5 +1,6 @@
 package com.cutepuppy.game;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.cutepuppy.game.open.Constants;
@@ -34,13 +35,13 @@ public class EnemyGenerator implements Runnable {
         } while(Dynamic.CAN_GENERATE_ENEMIES);
     }
     private void generateFalcon(){
-        Dynamic.enemy = new Enemy(Constants.FalconTexture, Dynamic.enemyid++);
+        Dynamic.enemy = new Enemy(Dynamic.assetManager.get("falcon/falcon-f1.png", Texture.class), Dynamic.enemyid++);
         Dynamic.enemy.setDamage(20);
         stage.addActor(Dynamic.enemy);
         Dynamic.enemies.add(Dynamic.enemy);
     }
     private void generateBird(){
-        Dynamic.enemy = new Enemy(Constants.BirdTexture, Dynamic.enemyid++);
+        Dynamic.enemy = new Enemy(Dynamic.assetManager.get("bird/bird-f1.png", Texture.class), Dynamic.enemyid++);
         Dynamic.enemy.setDamage(5);
         stage.addActor(Dynamic.enemy);
         Dynamic.enemies.add(Dynamic.enemy);

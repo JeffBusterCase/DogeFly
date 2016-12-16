@@ -1,6 +1,7 @@
 package com.cutepuppy.game.Stages;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -19,15 +20,15 @@ public class EndGameStage extends Stage {
 
         Gdx.input.setInputProcessor(this);
         
-        Dynamic.AssetManager.loadLostGameAssets();
-        Dynamic.AssetManager.finishLoading();
+        Dynamic.assetManager.loadLostGameAssets();
+        Dynamic.assetManager.finishLoading();
         
-        Background background = new Background(Dynamic.AssetManager.get("backgrounds/endGameBackground.png", Texture.class));
+        Background background = new Background(Dynamic.assetManager.get("backgrounds/endGameBackground.png", Texture.class));
         background.setSize(getWidth(), getHeight());
 
-        Image buttonMenu = new Image(Dynamic.AssetManager.get("buttons/menu.png", Texture.class));
-        Image buttonRetry = new Image(Dynamic.AssetManager.get("buttons/retry.png", Texture.class));
-        Image buttonQuit = new Image(Dynamic.AssetManager.get("buttons/quit.png", Texture.class));
+        Image buttonMenu = new Image(Dynamic.assetManager.get("buttons/menu.png", Texture.class));
+        Image buttonRetry = new Image(Dynamic.assetManager.get("buttons/retry.png", Texture.class));
+        Image buttonQuit = new Image(Dynamic.assetManager.get("buttons/quit.png", Texture.class));
 
         buttonMenu.setSize(buttonMenu.getWidth()/4, buttonMenu.getHeight()/4);
         buttonRetry.setSize(buttonRetry.getWidth()/4, buttonRetry.getHeight()/4);

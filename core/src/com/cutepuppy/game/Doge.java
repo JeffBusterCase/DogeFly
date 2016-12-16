@@ -20,7 +20,7 @@ public class Doge extends Image {
     private boolean canUseSuperPower;
     public Doge(Texture texture) {
         super(texture);
-        superPower = false;
+        canUseSuperPower = false;
         health = Constants.PlayerHealth;
         harpoonQuantity = Constants.HarpoonStartQuantity;
         setSize(getWidth()*2, getHeight()*2);
@@ -39,7 +39,6 @@ public class Doge extends Image {
     public Rectangle getBounds(){
         return bounds;
     }
-    public int getId(){return id;}
     public void collisionWith(Enemy enemy){
         health-=Constants.HIT_DAMAGE;
         if(health<=0) Dynamic.currentStage = new EndGameStage(Constants.viewport);
@@ -55,7 +54,7 @@ public class Doge extends Image {
     }
     public void throwHarpoon(){
         if (harpoonQuantity>0)  {
-            new Attack(Constants.HarpoonTexture, getY());
+            new Attack(Dynamic.assetManager.get("harpoon.png", Texture.class), getY());
             harpoonQuantity--;
         }
     }

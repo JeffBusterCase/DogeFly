@@ -30,5 +30,6 @@ public class DogeFly extends ApplicationAdapter {
 	@Override
 	public void dispose (){
 		Dynamic.currentStage.dispose();
+		Dynamic.assetManager.dispose();
 	}
 }

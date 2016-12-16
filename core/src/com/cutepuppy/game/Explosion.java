@@ -1,8 +1,9 @@
 package com.cutepuppy.game;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.cutepuppy.game.Stages.GameStage;
-import com.cutepuppy.game.open.Constants;
+import com.cutepuppy.game.open.Dynamic;
 
 /*
  * Created by jeffbustercase on 11/12/16.
@@ -21,7 +22,7 @@ public class Explosion implements Runnable {
         } catch(InterruptedException ex){ex.printStackTrace();}
     }
     private void main() throws InterruptedException {
-        Image explosion = new Image(Constants.ExplosionTexture);
+        Image explosion = new Image(Dynamic.assetManager.get("explosion.png", Texture.class));
         explosion.setSize(explosion.getWidth()/4, explosion.getHeight()/4);
         explosion.setPosition(pos[0], pos[1]);
         stage.addActor(explosion);

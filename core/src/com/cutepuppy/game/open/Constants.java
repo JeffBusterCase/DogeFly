@@ -11,7 +11,7 @@ public final class Constants {
     public static final float EnemySpeed = 5f;
     public static final float PlayerSpeedPower = 4f;
     public static final float AttackVel = 15f;
-    public static final int HarpoonStartQuantity = 10;
+    public static final int HarpoonStartQuantity = 25;
     public static final long EnemyGenerationTime = 1000;
     public static final int EnemiesThatMustBeKilledByLevel = 20;
 
