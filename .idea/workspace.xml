@@ -60,8 +60,8 @@
           </provider>
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="72">
-                <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
+              <first_editor relative-caret-position="120">
+                <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -1463,7 +1463,7 @@
       <workItem from="1481968301921" duration="601000" />
       <workItem from="1482145457245" duration="4466000" />
       <workItem from="1482263479603" duration="6030000" />
-      <workItem from="1482269662945" duration="911000" />
+      <workItem from="1482269662945" duration="1023000" />
     </task>
     <task id="LOCAL-00001" summary="Added Random enemies. and function die if hit the player(Doge)">
       <created>1481307384568</created>
@@ -1514,11 +1514,18 @@
       <option name="project" value="LOCAL" />
       <updated>1482268556678</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Updated deployed version on README.md">
+      <created>1482271924935</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1482271924935</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="125776000" />
+    <option name="totallyTimeSpent" value="125888000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1366" height="744" extended-state="6" />
@@ -1619,7 +1626,8 @@
     <MESSAGE value="Now Doge harpoons have a limit!" />
     <MESSAGE value="Finished use of AssetManager in all places." />
     <MESSAGE value="Added Soundtrack and finish method for each Stage." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Soundtrack and finish method for each Stage." />
+    <MESSAGE value="Updated deployed version on README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated deployed version on README.md" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1905,8 +1913,8 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="72">
-            <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
+          <first_editor relative-caret-position="120">
+            <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
             <folding />
           </first_editor>
           <second_editor />
