@@ -1,6 +1,7 @@
 package com.cutepuppy.game.Stages;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -20,7 +21,12 @@ public class MenuStage extends Stage {
 
         Gdx.input.setInputProcessor(this);
         
-        Dynamic.assetManager.loadMainMenuAssets();
+        Dynamic.assetManager.loadMainMenuStageAssets();
+
+
+        Dynamic.currentSoundtrack = Dynamic.assetManager.get("audio/mainMenuMusic.mp3", Music.class);
+        Dynamic.currentSoundtrack.setLooping(true);
+        Dynamic.currentSoundtrack.play();
 
         Background background = new Background(Dynamic.assetManager.get("backgrounds/menuBackground.png", Texture.class));
 
@@ -40,6 +46,7 @@ public class MenuStage extends Stage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                finish();
                 Dynamic.currentStage = new GameStage(Constants.viewport);
             }
         });
@@ -55,5 +62,10 @@ public class MenuStage extends Stage {
         addActor(background);
         addActor(buttonStart);
         addActor(buttonQuit);
+    }
+    private void finish(){
+        Dynamic.currentSoundtrack.stop();
+        Dynamic.assetManager.disposeMainMenuStageAssets();
+        dispose();
     }
 }

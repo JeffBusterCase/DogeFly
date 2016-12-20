@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.cutepuppy.game.Stages.CompletedGameStage;
+import com.cutepuppy.game.Stages.GameStage;
 import com.cutepuppy.game.open.Constants;
 import com.cutepuppy.game.open.Dynamic;
 
@@ -62,7 +63,9 @@ public class Enemy extends Image {
         Dynamic.enemies.removeValue(this, true);
         if(Dynamic.enemyid-2>=Constants.EnemiesThatMustBeKilledByLevel){
             Dynamic.CAN_GENERATE_ENEMIES = false;
-            Dynamic.enemyGeneratorThread.interrupt();
+            if(Dynamic.enemyGeneratorThread.isAlive())
+                Dynamic.enemyGeneratorThread.interrupt();
+            ((GameStage)Dynamic.currentStage).finish();
             Dynamic.currentStage = new CompletedGameStage(Constants.viewport);
         }
     }

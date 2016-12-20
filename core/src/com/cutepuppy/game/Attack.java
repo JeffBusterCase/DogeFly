@@ -1,5 +1,6 @@
 package com.cutepuppy.game;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -10,7 +11,7 @@ import com.cutepuppy.game.open.Dynamic;
  */
 public class Attack extends Image {
     private Rectangle bounds;
-    public Attack(Texture texture, float ypos) {
+    Attack(Texture texture, float ypos) {
         super(texture);
         setSize(getWidth()*2, getHeight()*2);
         setOrigin(getWidth()/2, getHeight()/2);
@@ -19,6 +20,11 @@ public class Attack extends Image {
         bounds = new Rectangle(getX(), getY(), getWidth(), getHeight());
         Dynamic.currentStage.addActor(this);
         Dynamic.attacks.add(this);
+
+        // attack Sound
+        // Sound attackSFX = Dynamic.assetManager.get("audio/throwing.wav", Sound.class);
+        Sound attackSFX = Dynamic.assetManager.get("audio/throw.wav", Sound.class);
+        attackSFX.play();
     }
 
     @Override

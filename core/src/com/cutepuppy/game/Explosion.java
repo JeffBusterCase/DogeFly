@@ -1,5 +1,6 @@
 package com.cutepuppy.game;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.cutepuppy.game.Stages.GameStage;
@@ -22,10 +23,15 @@ public class Explosion implements Runnable {
         } catch(InterruptedException ex){ex.printStackTrace();}
     }
     private void main() throws InterruptedException {
+        // Explosion Sound
+        Sound explosionSFX = Dynamic.assetManager.get("audio/explosion.wav", Sound.class);
+
+        // Explosion Image
         Image explosion = new Image(Dynamic.assetManager.get("explosion.png", Texture.class));
         explosion.setSize(explosion.getWidth()/4, explosion.getHeight()/4);
         explosion.setPosition(pos[0], pos[1]);
         stage.addActor(explosion);
+        explosionSFX.play();
         Thread.sleep(500);
         explosion.remove();
         explosion.clear();

@@ -1,5 +1,6 @@
 package com.cutepuppy.game.open;
 
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.cutepuppy.game.Attack;
@@ -17,4 +18,5 @@ public class Dynamic {
     public static Stage currentStage;
     public static Thread enemyGeneratorThread;
     public static AssetManager assetManager = new AssetManager();
+    public static Music currentSoundtrack;
 }

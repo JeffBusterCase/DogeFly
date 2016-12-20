@@ -2,6 +2,7 @@ package com.cutepuppy.game.Stages;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader.FreeTypeFontLoaderParameter;
@@ -24,11 +25,12 @@ public class GameStage extends Stage {
         super(viewport);
 
         Dynamic.CAN_GENERATE_ENEMIES = true;
+        Dynamic.enemyid = 1;
 
         Gdx.input.setInputProcessor(this);
         
         // Load Default (For any level) assets
-        Dynamic.assetManager.loadDefaultGameAssets();
+        Dynamic.assetManager.loadDefaultGameStageAssets();
 
         enemiesYetLabel = createLabel("Enemies : "+(Dynamic.enemyid-2), getWidth()/2, getHeight()-20, Color.BLACK);
 
@@ -45,12 +47,17 @@ public class GameStage extends Stage {
         switch (Dynamic.currentLevel){
             case (2):
                 Dynamic.assetManager.loadLevel2Assets();
+                Dynamic.currentSoundtrack = Dynamic.assetManager.get("audio/secondLevelMusic.mp3", Music.class);
                 background = new Background(Dynamic.assetManager.get("backgrounds/skyBackgroundTexture.png", Texture.class));
                 break;
             default:
                 Dynamic.assetManager.loadLevel1Assets();
+                Dynamic.currentSoundtrack = Dynamic.assetManager.get("audio/firstLevelMusic.mp3", Music.class);
                 background = new Background(Dynamic.assetManager.get("backgrounds/gameBackground.png", Texture.class));
         }
+
+        Dynamic.currentSoundtrack.setLooping(true);
+        Dynamic.currentSoundtrack.play();
 
         background.setSize(getWidth(), getHeight());
 
@@ -116,5 +123,17 @@ public class GameStage extends Stage {
         label.setOrigin(label.getWidth()/2, label.getHeight()/2);
         label.setPosition(x, y);
         return label;
+    }
+    public void finish(){
+        Dynamic.currentSoundtrack.stop();
+        Dynamic.assetManager.disposeDefaultGameStageAssets();
+        switch (Dynamic.currentLevel){
+            case 2:
+                Dynamic.assetManager.disposeLevel2Assets();
+                break;
+            default:
+                Dynamic.assetManager.disposeLevel1Assets();
+        }
+        dispose();
     }
 }

@@ -1,6 +1,8 @@
 package com.cutepuppy.game.Stages;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -20,9 +22,13 @@ public class CompletedGameStage extends Stage {
 
         Gdx.input.setInputProcessor(this);
         
-        Dynamic.assetManager.loadWinGameAssets();
+        Dynamic.assetManager.loadCompletedGameStageAssets();
         Dynamic.assetManager.finishLoading();
-        
+
+        Dynamic.currentSoundtrack = Dynamic.assetManager.get("audio/winGameMusic.mp3", Music.class);
+        Dynamic.currentSoundtrack.setLooping(true);
+        Dynamic.currentSoundtrack.setPosition(Dynamic.currentSoundtrack.getPosition()+10f);
+
         Background background = new Background(Dynamic.assetManager.get("backgrounds/winGameBackground.png", Texture.class));
 
         // TODO: Show spec of the game
@@ -44,6 +50,7 @@ public class CompletedGameStage extends Stage {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 Dynamic.currentLevel++;
+                finish();
                 Dynamic.currentStage = new GameStage(Constants.viewport);
             }
         });
@@ -51,6 +58,7 @@ public class CompletedGameStage extends Stage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                finish();
                 Dynamic.currentStage = new MenuStage(Constants.viewport);
             }
         });
@@ -58,5 +66,14 @@ public class CompletedGameStage extends Stage {
         addActor(background);
         addActor(buttonNextLevel);
         addActor(buttonMenu);
+
+        // Level Completed Sound Effect
+        Sound levelCompletedSFX = Dynamic.assetManager.get("audio/levelCompleted.wav", Sound.class);
+        levelCompletedSFX.play();
+    }
+    private void finish(){
+        Dynamic.currentSoundtrack.stop();
+        Dynamic.assetManager.disposeCompletedGameStageAssets();
+        dispose();
     }
 }

@@ -4,7 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.cutepuppy.game.Stages.EndGameStage;
+import com.cutepuppy.game.Stages.GameStage;
+import com.cutepuppy.game.Stages.LostGameStage;
 import com.cutepuppy.game.open.Constants;
 import com.cutepuppy.game.open.Dynamic;
 
@@ -41,7 +42,7 @@ public class Doge extends Image {
     }
     public void collisionWith(Enemy enemy){
         health-=Constants.HIT_DAMAGE;
-        if(health<=0) Dynamic.currentStage = new EndGameStage(Constants.viewport);
+        if(health<=0) die();
     }
 
     public int getHealth() {
@@ -50,7 +51,7 @@ public class Doge extends Image {
 
     public void setHealth(int health) {
         this.health = health;
-        if(health<1) Dynamic.currentStage = new EndGameStage(Constants.viewport);
+        if(health<1) die();
     }
     public void throwHarpoon(){
         if (harpoonQuantity>0)  {
@@ -63,5 +64,13 @@ public class Doge extends Image {
     }
     public int getHarpoonQuantity(){
         return harpoonQuantity;
+    }
+    private void die(){
+        Dynamic.CAN_GENERATE_ENEMIES = false;
+        if(Dynamic.enemyGeneratorThread.isAlive())
+            Dynamic.enemyGeneratorThread.interrupt();
+
+        ((GameStage)Dynamic.currentStage).finish();
+        Dynamic.currentStage = new LostGameStage(Constants.viewport);
     }
 }
