@@ -1,7 +1,7 @@
 # DogeFly
 A LibGDX Game where you play as doge and destroy Flying enemies.
 
-[download DogeFly-2016-12-14.tar.gz](https://drive.google.com/open?id=0B_B0TMZ4370xOTF1SUdaODNIUlE)
+Download [DogeFly-2016-12-16.rar](https://drive.google.com/open?id=0B_B0TMZ4370xU3E3eHltZ2ZiWDg)
 
 ###First Level
 ![alt tag](http://i.imgur.com/Ez2Y1tN.png)
