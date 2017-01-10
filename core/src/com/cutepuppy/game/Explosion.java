@@ -3,6 +3,7 @@ package com.cutepuppy.game;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.cutepuppy.game.Stages.GameStage;
 import com.cutepuppy.game.open.Dynamic;
 
@@ -24,7 +25,19 @@ public class Explosion implements Runnable {
     }
     private void main() throws InterruptedException {
         // Explosion Sound
-        Sound explosionSFX = Dynamic.assetManager.get("audio/explosion.wav", Sound.class);
+        Sound explosionSFX;
+        try {
+            explosionSFX = Dynamic.assetManager.get("audio/explosion.wav", Sound.class);
+        } catch( GdxRuntimeException ex) {
+            System.out.println(GameStage.class.toString());
+            if (Dynamic.currentStage.getClass()!=GameStage.class)
+                System.out.println("WARNING: Tried to get already unloaded data.("+
+                        Dynamic.currentStage.getClass().toString()+
+                        ")");
+            else ex.printStackTrace();
+            return;
+        }
+
 
         // Explosion Image
         Image explosion = new Image(Dynamic.assetManager.get("explosion.png", Texture.class));

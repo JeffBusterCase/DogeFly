@@ -66,10 +66,6 @@ public class Doge extends Image {
         return harpoonQuantity;
     }
     private void die(){
-        Dynamic.CAN_GENERATE_ENEMIES = false;
-        if(Dynamic.enemyGeneratorThread.isAlive())
-            Dynamic.enemyGeneratorThread.interrupt();
-
         ((GameStage)Dynamic.currentStage).finish();
         Dynamic.currentStage = new LostGameStage(Constants.viewport);
     }

@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.cutepuppy.game.AnimationBatch;
 import com.cutepuppy.game.backgrounds.Background;
 import com.cutepuppy.game.open.Constants;
 import com.cutepuppy.game.open.Dynamic;
@@ -20,9 +21,10 @@ public class MenuStage extends Stage {
         super(viewport);
 
         Gdx.input.setInputProcessor(this);
-        
-        Dynamic.assetManager.loadMainMenuStageAssets();
 
+        Dynamic.batch = new AnimationBatch();
+
+        Dynamic.assetManager.loadMainMenuStageAssets();
 
         Dynamic.currentSoundtrack = Dynamic.assetManager.get("audio/mainMenuMusic.mp3", Music.class);
         Dynamic.currentSoundtrack.setLooping(true);
@@ -47,6 +49,9 @@ public class MenuStage extends Stage {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 finish();
+
+                // Start new Game
+                Dynamic.currentLevel = 1;
                 Dynamic.currentStage = new GameStage(Constants.viewport);
             }
         });

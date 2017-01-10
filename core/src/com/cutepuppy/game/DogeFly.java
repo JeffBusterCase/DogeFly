@@ -8,6 +8,7 @@ import com.cutepuppy.game.open.Constants;
 import com.cutepuppy.game.open.Dynamic;
 
 public class DogeFly extends ApplicationAdapter {
+    private float delta, elapsedTime;
     @Override
 	public void create () {
         Dynamic.currentStage = new MenuStage(Constants.viewport);
@@ -16,20 +17,22 @@ public class DogeFly extends ApplicationAdapter {
 	@Override
 	public void render () {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        try {
-
-            Dynamic.currentStage.act(Gdx.graphics.getDeltaTime());
-
+        delta = Gdx.graphics.getDeltaTime();
+        try { Dynamic.currentStage.act(delta); } catch (NullPointerException ex){
+            System.out.println("WARNING : NullPointerException on `Gdx.graphics.getDeltaTime();`(Skipping stage action)");
+            return;
         }
-        catch (NullPointerException ex) {System.out.println("WARNING : NullPointerException on `Gdx.graphics.getDeltaTime();`(Skipping stage action)");}
-
+        elapsedTime+=delta;
         Dynamic.currentStage.draw();
+        try {Dynamic.batch.draw(elapsedTime);} catch (NullPointerException ex){
+            System.out.println("WARNING: NullPointeException on Batch Draw");
+        }
 	}
 
 	@Override
 	public void dispose (){
 		Dynamic.currentStage.dispose();
+        Dynamic.batch.dispose();
 		Dynamic.assetManager.dispose();
 	}
 }

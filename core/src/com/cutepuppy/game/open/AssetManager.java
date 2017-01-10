@@ -55,32 +55,45 @@ public class AssetManager extends com.badlogic.gdx.assets.AssetManager {
         unload("audio/mainMenuMusic.mp3");
     }
     public void loadLevel1Assets(){
+        load("bird/bird-f0.png", Texture.class);
         load("bird/bird-f1.png", Texture.class);
+        load("bird/bird-f2.png", Texture.class);
         load("backgrounds/gameBackground.png", Texture.class);
         load("audio/firstLevelMusic.mp3", Music.class);
         finishLoading();
     }
     public void disposeLevel1Assets(){
+        unload("bird/bird-f0.png");
         unload("bird/bird-f1.png");
+        unload("bird/bird-f2.png");
         unload("backgrounds/gameBackground.png");
         unload("audio/firstLevelMusic.mp3");
     }
     public void loadLevel2Assets(){
+        load("bird/bird-f0.png", Texture.class);
         load("bird/bird-f1.png", Texture.class);
+        load("bird/bird-f2.png", Texture.class);
+        load("falcon/falcon-f0.png", Texture.class);
         load("falcon/falcon-f1.png", Texture.class);
+        load("falcon/falcon-f2.png", Texture.class);
         load("backgrounds/skyBackgroundTexture.png", Texture.class);
         load("audio/secondLevelMusic.mp3", Music.class);
         finishLoading();
     }
     public void disposeLevel2Assets(){
+        unload("bird/bird-f0.png");
         unload("bird/bird-f1.png");
+        unload("bird/bird-f2.png");
+        unload("falcon/falcon-f0.png");
         unload("falcon/falcon-f1.png");
+        unload("falcon/falcon-f2.png");
         unload("backgrounds/skyBackgroundTexture.png");
         unload("audio/secondLevelMusic.mp3");
     }
     public void loadLostGameStageAssets(){
         load("buttons/menu.png", Texture.class);
         load("buttons/retry.png", Texture.class);
+        load("buttons/quit.png", Texture.class);
         load("backgrounds/endGameBackground.png", Texture.class);
         load("audio/loseLevel.wav", Sound.class);
         load("audio/lostGameMusic.mp3", Music.class);
@@ -89,6 +102,7 @@ public class AssetManager extends com.badlogic.gdx.assets.AssetManager {
     public void disposeLostGameStageAssets(){
         unload("buttons/menu.png");
         unload("buttons/retry.png");
+        unload("buttons/quit.png");
         unload("backgrounds/endGameBackground.png");
         unload("audio/loseLevel.wav");
         unload("audio/lostGameMusic.mp3");

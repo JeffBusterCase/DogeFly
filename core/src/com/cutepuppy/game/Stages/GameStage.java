@@ -28,7 +28,9 @@ public class GameStage extends Stage {
         Dynamic.enemyid = 1;
 
         Gdx.input.setInputProcessor(this);
-        
+
+        Dynamic.batch = new AnimationBatch();
+
         // Load Default (For any level) assets
         Dynamic.assetManager.loadDefaultGameStageAssets();
 
@@ -76,8 +78,6 @@ public class GameStage extends Stage {
     public void act(float delta) {
         super.act(delta);
         getCurrentInputKey();
-
-
         for (Attack attack : Dynamic.attacks){
             attack.setPosition(attack.getX()+Constants.AttackVel, attack.getY());
             for (Enemy enemy : Dynamic.enemies)
@@ -125,6 +125,9 @@ public class GameStage extends Stage {
         return label;
     }
     public void finish(){
+        Dynamic.CAN_GENERATE_ENEMIES = false;
+        if(Dynamic.enemyGeneratorThread.isAlive())
+            Dynamic.enemyGeneratorThread.interrupt();
         Dynamic.currentSoundtrack.stop();
         Dynamic.assetManager.disposeDefaultGameStageAssets();
         switch (Dynamic.currentLevel){

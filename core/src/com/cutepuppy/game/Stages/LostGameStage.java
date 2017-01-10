@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.cutepuppy.game.AnimationBatch;
 import com.cutepuppy.game.backgrounds.Background;
 import com.cutepuppy.game.open.Constants;
 import com.cutepuppy.game.open.Dynamic;
@@ -21,7 +22,9 @@ public class LostGameStage extends Stage {
         super(viewport);
 
         Gdx.input.setInputProcessor(this);
-        
+
+        Dynamic.batch = new AnimationBatch();
+
         Dynamic.assetManager.loadLostGameStageAssets();
         Dynamic.assetManager.finishLoading();
 

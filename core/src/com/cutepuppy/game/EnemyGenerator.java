@@ -1,6 +1,5 @@
 package com.cutepuppy.game;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.cutepuppy.game.open.Constants;
@@ -35,15 +34,26 @@ public class EnemyGenerator implements Runnable {
         } while(Dynamic.CAN_GENERATE_ENEMIES);
     }
     private void generateFalcon(){
-        Dynamic.enemy = new Enemy(Dynamic.assetManager.get("falcon/falcon-f1.png", Texture.class), Dynamic.enemyid++);
+        Dynamic.enemy = new Enemy(Dynamic.enemyid++);
         Dynamic.enemy.setDamage(20);
+        Dynamic.enemy.setAnimations(1f/6f, new String[][]{
+                {"falcon/falcon-f0.png", "falcon/falcon-f1.png", "falcon/falcon-f2.png", "falcon/falcon-f1.png"}
+        });
+        Dynamic.enemy.setAnimationState(0);
         stage.addActor(Dynamic.enemy);
+        Dynamic.batch.addActor(Dynamic.enemy);
         Dynamic.enemies.add(Dynamic.enemy);
     }
     private void generateBird(){
-        Dynamic.enemy = new Enemy(Dynamic.assetManager.get("bird/bird-f1.png", Texture.class), Dynamic.enemyid++);
+        Dynamic.enemy = new Enemy(Dynamic.enemyid++);
         Dynamic.enemy.setDamage(5);
+        Dynamic.enemy.setAnimations(1f/6f, new String[][]{
+                {"bird/bird-f0.png", "bird/bird-f1.png", "bird/bird-f2.png", "bird/bird-f1.png"}
+        });
+        Dynamic.enemy.setAnimationState(0);
         stage.addActor(Dynamic.enemy);
+        Dynamic.batch.addActor(Dynamic.enemy);
         Dynamic.enemies.add(Dynamic.enemy);
+        System.out.println("Width of this actor: "+Dynamic.enemy.getBounds().toString());
     }
 }

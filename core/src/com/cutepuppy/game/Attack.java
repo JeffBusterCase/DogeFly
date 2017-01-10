@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.cutepuppy.game.open.Dynamic;
 
-/**
+/*
  * Created by jeffbustercase on 13/12/16.
  */
 public class Attack extends Image {
@@ -21,8 +21,6 @@ public class Attack extends Image {
         Dynamic.currentStage.addActor(this);
         Dynamic.attacks.add(this);
 
-        // attack Sound
-        // Sound attackSFX = Dynamic.assetManager.get("audio/throwing.wav", Sound.class);
         Sound attackSFX = Dynamic.assetManager.get("audio/throw.wav", Sound.class);
         attackSFX.play();
     }
