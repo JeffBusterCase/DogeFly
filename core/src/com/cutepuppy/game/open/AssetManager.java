@@ -24,6 +24,10 @@ public class AssetManager extends com.badlogic.gdx.assets.AssetManager {
         load("explosion.png", Texture.class);
         load("audio/explosion.wav", Sound.class);
         load("audio/throw.wav", Sound.class);
+        load("audio/dog_hurt1.wav", Sound.class);
+        load("audio/dog_hurt2.wav", Sound.class);
+        load("audio/dog_hurt3.wav", Sound.class);
+        load("audio/dog_die.wav", Sound.class);
         finishLoading();
     }
     public void disposeDefaultGameStageAssets(){
@@ -32,6 +36,10 @@ public class AssetManager extends com.badlogic.gdx.assets.AssetManager {
         unload("explosion.png");
         unload("audio/explosion.wav");
         unload("audio/throw.wav");
+        unload("audio/dog_hurt1.wav");
+        unload("audio/dog_hurt2.wav");
+        unload("audio/dog_hurt3.wav");
+        unload("audio/dog_die.wav");
     }
     public BitmapFont getFont(FreetypeFontLoader.FreeTypeFontLoaderParameter parameter){
         if(!isLoaded(parameter.fontFileName, BitmapFont.class)){
@@ -95,8 +103,9 @@ public class AssetManager extends com.badlogic.gdx.assets.AssetManager {
         load("buttons/retry.png", Texture.class);
         load("buttons/quit.png", Texture.class);
         load("backgrounds/endGameBackground.png", Texture.class);
-        load("audio/loseLevel.wav", Sound.class);
         load("audio/lostGameMusic.mp3", Music.class);
+        load("audio/loseLevel.wav", Sound.class);
+        load("audio/dog_die.wav", Sound.class);
         finishLoading();
     }
     public void disposeLostGameStageAssets(){
@@ -104,8 +113,9 @@ public class AssetManager extends com.badlogic.gdx.assets.AssetManager {
         unload("buttons/retry.png");
         unload("buttons/quit.png");
         unload("backgrounds/endGameBackground.png");
-        unload("audio/loseLevel.wav");
         unload("audio/lostGameMusic.mp3");
+        unload("audio/loseLevel.wav");
+        unload("audio/dog_die.wav");
     }
     public void loadCompletedGameStageAssets(){
         load("buttons/nextLevel.png", Texture.class);

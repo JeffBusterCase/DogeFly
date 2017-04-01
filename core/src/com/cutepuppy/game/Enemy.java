@@ -21,7 +21,7 @@ public class Enemy extends DFActor {
         this.id = id;
 
         // Set values
-        damage=0;
+        damage=Constants.HIT_DAMAGE;
         this.health = health;
 
         // Adjust Batch Size

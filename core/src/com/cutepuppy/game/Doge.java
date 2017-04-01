@@ -1,9 +1,11 @@
 package com.cutepuppy.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.Array;
 import com.cutepuppy.game.Stages.GameStage;
 import com.cutepuppy.game.Stages.LostGameStage;
 import com.cutepuppy.game.open.Constants;
@@ -19,6 +21,7 @@ public class Doge extends Image {
     // Attacks
     private int harpoonQuantity;
     private boolean canUseSuperPower;
+    private final Array<Sound> hurtSFXs;
     public Doge(Texture texture) {
         super(texture);
         canUseSuperPower = false;
@@ -30,6 +33,12 @@ public class Doge extends Image {
         setOrigin(getWidth()/2, getHeight()/2);
         setPosition(100f, Gdx.graphics.getHeight()/2);
         setScale(-getScaleX(), getScaleY());
+        hurtSFXs = new Array<Sound>(3);
+        hurtSFXs.addAll(
+                Dynamic.assetManager.get("audio/dog_hurt1.wav", Sound.class),
+                Dynamic.assetManager.get("audio/dog_hurt2.wav", Sound.class),
+                Dynamic.assetManager.get("audio/dog_hurt3.wav", Sound.class)
+        );
     }
     @Override
     public void act(float delta) {
@@ -53,6 +62,12 @@ public class Doge extends Image {
         this.health = health;
         if(health<=0) die();
     }
+    public void hit(int damage){
+        this.health -= damage;
+        if(health<=0) die();
+        else
+            hurtSFXs.random().play();// Play hit sound
+    }
     public void throwHarpoon(){
         if (harpoonQuantity>0)  {
             new Attack(Dynamic.assetManager.get("harpoon.png", Texture.class), getY(), Constants.HARPOON_DAMAGE);
@@ -66,7 +81,7 @@ public class Doge extends Image {
         return harpoonQuantity;
     }
     private void die(){
-        ((GameStage)Dynamic.currentStage).finish();
+        Dynamic.currentStage.finish();
         Dynamic.currentStage = new LostGameStage(Constants.viewport);
     }
 }

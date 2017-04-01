@@ -91,6 +91,7 @@ public class GameStage extends DFStage {
         for (Enemy enemy : Dynamic.enemies) {
             if (doge.getBounds().overlaps(enemy.getBounds())) {
                 doge.setHealth(doge.getHealth()-Constants.HIT_DAMAGE);
+                doge.hit(enemy.getDamage());
                 dogeHealthLabel.setText("Health : "+doge.getHealth());
                 new Thread(new Explosion(this, enemy.getX(), enemy.getY())).start();
                 enemy.die();

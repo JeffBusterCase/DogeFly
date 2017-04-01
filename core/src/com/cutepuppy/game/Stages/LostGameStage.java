@@ -83,6 +83,10 @@ public class LostGameStage extends DFStage {
 
         Sound loseGameSFX = Dynamic.assetManager.get("audio/loseLevel.wav", Sound.class);
         loseGameSFX.play();
+
+
+        Sound dogDieSFX = Dynamic.assetManager.get("audio/dog_die.wav", Sound.class);
+        dogDieSFX.play();
     }
     public void finish(){
         Dynamic.currentSoundtrack.stop();
