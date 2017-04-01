@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -16,7 +15,7 @@ import com.cutepuppy.game.open.Dynamic;
 /*
  * Created by jeffbustercase on 09/12/16.
  */
-public class MenuStage extends Stage {
+public class MenuStage extends DFStage {
     public MenuStage(ScreenViewport viewport) {
         super(viewport);
 
@@ -68,7 +67,7 @@ public class MenuStage extends Stage {
         addActor(buttonStart);
         addActor(buttonQuit);
     }
-    private void finish(){
+    public void finish(){
         Dynamic.currentSoundtrack.stop();
         Dynamic.assetManager.disposeMainMenuStageAssets();
         dispose();

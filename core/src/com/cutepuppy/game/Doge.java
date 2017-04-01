@@ -51,11 +51,11 @@ public class Doge extends Image {
 
     public void setHealth(int health) {
         this.health = health;
-        if(health<1) die();
+        if(health<=0) die();
     }
     public void throwHarpoon(){
         if (harpoonQuantity>0)  {
-            new Attack(Dynamic.assetManager.get("harpoon.png", Texture.class), getY());
+            new Attack(Dynamic.assetManager.get("harpoon.png", Texture.class), getY(), Constants.HARPOON_DAMAGE);
             harpoonQuantity--;
         }
     }

@@ -11,7 +11,8 @@ import com.cutepuppy.game.open.Dynamic;
  */
 public class Attack extends Image {
     private Rectangle bounds;
-    Attack(Texture texture, float ypos) {
+    public int damage;
+    Attack(Texture texture, float ypos, int damage) {
         super(texture);
         setSize(getWidth()*2, getHeight()*2);
         setOrigin(getWidth()/2, getHeight()/2);
@@ -20,6 +21,8 @@ public class Attack extends Image {
         bounds = new Rectangle(getX(), getY(), getWidth(), getHeight());
         Dynamic.currentStage.addActor(this);
         Dynamic.attacks.add(this);
+
+        this.damage = damage;
 
         Sound attackSFX = Dynamic.assetManager.get("audio/throw.wav", Sound.class);
         attackSFX.play();

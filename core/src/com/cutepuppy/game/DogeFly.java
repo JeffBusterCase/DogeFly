@@ -19,13 +19,15 @@ public class DogeFly extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         delta = Gdx.graphics.getDeltaTime();
         try { Dynamic.currentStage.act(delta); } catch (NullPointerException ex){
-            System.out.println("WARNING : NullPointerException on `Gdx.graphics.getDeltaTime();`(Skipping stage action)");
+            System.out.println("WARNING: NullPointerException on `Gdx.graphics.getDeltaTime();`(Skipping stage action)");
             return;
         }
         elapsedTime+=delta;
-        Dynamic.currentStage.draw();
+        try {Dynamic.currentStage.draw();} catch (NullPointerException ex){
+            System.out.println("WARNING: NullPointerException on Stage draw");
+        }
         try {Dynamic.batch.draw(elapsedTime);} catch (NullPointerException ex){
-            System.out.println("WARNING: NullPointeException on Batch Draw");
+            System.out.println("WARNING: NullPointerException on Batch draw");
         }
 	}
 

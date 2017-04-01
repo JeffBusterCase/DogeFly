@@ -6,7 +6,6 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader.FreeTypeFontLoaderParameter;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.cutepuppy.game.*;
@@ -18,7 +17,7 @@ import com.cutepuppy.game.open.Dynamic;
 /*
  * Created by jeffbustercase on 09/12/16.
  */
-public class GameStage extends Stage {
+public class GameStage extends DFStage {
     private Doge doge;
     private Label dogeHealthLabel, enemiesYetLabel, harpoonsQuantity;
     GameStage(ScreenViewport viewport) {
@@ -83,7 +82,7 @@ public class GameStage extends Stage {
             for (Enemy enemy : Dynamic.enemies)
                 if(attack.getBounds().overlaps(enemy.getBounds())){
                     new Thread(new Explosion(this, enemy.getX(), enemy.getY())).start();
-                    enemy.die();
+                    enemy.hit(attack.damage);
                     attack.destroy();
                     break;
                 }

@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.cutepuppy.game.Stages.CompletedGameStage;
-import com.cutepuppy.game.Stages.GameStage;
 import com.cutepuppy.game.open.Constants;
 import com.cutepuppy.game.open.Dynamic;
 
@@ -14,14 +13,16 @@ import com.cutepuppy.game.open.Dynamic;
 public class Enemy extends DFActor {
     private int id;
     private int damage;
+    private int health;
     private Rectangle bounds;
 
-    Enemy(int id){
+    Enemy(int id, int health){
         super();
         this.id = id;
 
         // Set values
         damage=0;
+        this.health = health;
 
         // Adjust Batch Size
         setBatchSize(getBatchWidth()/4, getBatchHeight()/4);
@@ -43,7 +44,7 @@ public class Enemy extends DFActor {
         super.act(delta);
 
         // If pass through limit, die.
-        if(getX()<=-getWidth()) die();
+        if(getX()<=-getWidth() || health <= 0) die();
 
         // Constant Movement
         setPosition(getX()-Constants.EnemySpeed, getY());
@@ -56,7 +57,10 @@ public class Enemy extends DFActor {
         bounds = new Rectangle(getX(), getY(), getWidth(), getHeight());
         bounds.setPosition(getX()-(getHeight()/2), getY()-(getHeight()/2));
     }
-
+    public void hit(int damage){
+        health -= damage;
+        if(health<=0) die();
+    }
     public int getId() {
         return id;
     }
@@ -80,7 +84,7 @@ public class Enemy extends DFActor {
             Dynamic.CAN_GENERATE_ENEMIES = false;
             if(Dynamic.enemyGeneratorThread.isAlive())
                 Dynamic.enemyGeneratorThread.interrupt();
-            ((GameStage)Dynamic.currentStage).finish();
+            Dynamic.currentStage.finish();
             Dynamic.currentStage = new CompletedGameStage(Constants.viewport);
         }
     }

@@ -5,7 +5,6 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -17,7 +16,7 @@ import com.cutepuppy.game.open.Dynamic;
 /*
  * Created by jeffbustercase on 11/12/16.
  */
-public class CompletedGameStage extends Stage {
+public class CompletedGameStage extends DFStage {
     public CompletedGameStage(final Viewport viewport) {
         super(viewport);
 
@@ -54,7 +53,7 @@ public class CompletedGameStage extends Stage {
                 super.clicked(event, x, y);
                 Dynamic.currentLevel++;
                 finish();
-                if(Dynamic.currentLevel==Constants.LEVELS){
+                if(Dynamic.currentLevel>Constants.LEVELS){
                     Dynamic.currentStage = new MenuStage(Constants.viewport);
                     return;
                 }
@@ -78,7 +77,7 @@ public class CompletedGameStage extends Stage {
         Sound levelCompletedSFX = Dynamic.assetManager.get("audio/levelCompleted.wav", Sound.class);
         levelCompletedSFX.play();
     }
-    private void finish(){
+    public void finish(){
         Dynamic.currentSoundtrack.stop();
         Dynamic.assetManager.disposeCompletedGameStageAssets();
         dispose();

@@ -18,4 +18,5 @@ public final class Constants {
     public static final int LEVELS = 2;
 
     public static final ScreenViewport viewport = new ScreenViewport();
+    public static final int HARPOON_DAMAGE = 12;
 }
