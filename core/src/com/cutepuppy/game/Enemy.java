@@ -47,7 +47,7 @@ public class Enemy extends DFActor {
         if(getX()<=-getWidth() || health <= 0) die();
 
         // Constant Movement
-        setPosition(getX()-Constants.EnemySpeed, getY());
+        setPosition(getX()-(Constants.EnemySpeed*delta), getY());
 
         // Show with the size of the current frame of the animation
         float width = getCurrentAnimation().getKeyFrame(delta).getRegionWidth();

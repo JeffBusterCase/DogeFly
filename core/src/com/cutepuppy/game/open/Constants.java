@@ -8,9 +8,9 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 public final class Constants {
     public static final int PlayerHealth = 100;
     public static final int HIT_DAMAGE = 10;
-    public static final float EnemySpeed = 5f;
-    public static final float PlayerSpeedPower = 4f;
-    public static final float AttackVel = 15f;
+    public static final float EnemySpeed = 350f;
+    public static final float PlayerSpeedPower = 300f;
+    public static final float AttackVel = 850f;
     public static final int HarpoonStartQuantity = 75;
     public static final long EnemyGenerationTime = 750;
     public static final int ACTORS_LIMIT = 7;

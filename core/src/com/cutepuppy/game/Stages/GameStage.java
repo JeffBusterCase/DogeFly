@@ -76,9 +76,9 @@ public class GameStage extends DFStage {
     @Override
     public void act(float delta) {
         super.act(delta);
-        getCurrentInputKey();
+        getCurrentInputKey(delta);
         for (Attack attack : Dynamic.attacks){
-            attack.setPosition(attack.getX()+Constants.AttackVel, attack.getY());
+            attack.setPosition(attack.getX()+(Constants.AttackVel*delta), attack.getY());
             for (Enemy enemy : Dynamic.enemies)
                 if(attack.getBounds().overlaps(enemy.getBounds())){
                     new Thread(new Explosion(this, enemy.getX(), enemy.getY())).start();
@@ -101,16 +101,16 @@ public class GameStage extends DFStage {
         enemiesYetLabel.setText("Enemies : "+(Dynamic.enemyid-2));
         harpoonsQuantity.setText("Harpoons : "+(doge.getHarpoonQuantity()));
     }
-    private void getCurrentInputKey(){
+    private void getCurrentInputKey(float delta){
         if(Gdx.input.isKeyJustPressed(Input.Keys.P))
-            doge.throwHarpoon();
-        else if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
             doge.activateSuperPower();
+        else if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
+            doge.throwHarpoon();
 
         if(Gdx.input.isKeyPressed(Input.Keys.W))
-            doge.setPosition(doge.getX(), doge.getY()+Constants.PlayerSpeedPower);
+            doge.setPosition(doge.getX(), doge.getY()+(Constants.PlayerSpeedPower*delta));
         else if (Gdx.input.isKeyPressed(Input.Keys.S))
-            doge.setPosition(doge.getX(), doge.getY()-Constants.PlayerSpeedPower);
+            doge.setPosition(doge.getX(), doge.getY()-(Constants.PlayerSpeedPower*delta));
     }
     private static Label createLabel(String text, float x, float y, Color color){
 
